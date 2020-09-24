@@ -8,6 +8,7 @@ class ActivityLog(models.Model):
     next_efforts = models.TextField()
     impediments = models.TextField()
     other_notable_feedback = models.TextField()
+    datetime_submitted = jmodels.jDateTimeField()
     from_time = jmodels.jDateTimeField()
     to_time = jmodels.jDateTimeField()
 
