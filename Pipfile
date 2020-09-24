@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pylama = "*"
+black = "*"
 
 [packages]
 django = "*"
@@ -12,3 +13,6 @@ django-jalali = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
