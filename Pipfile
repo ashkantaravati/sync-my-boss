@@ -4,9 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylama = "*"
 
 [packages]
 django = "*"
+django-jalali = "*"
 
 [requires]
 python_version = "3.8"
