@@ -17,7 +17,4 @@ from django.contrib import admin
 from django.urls import path
 from employee_activity import views
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',views.all_activities)
-]
+urlpatterns = [path("admin/", admin.site.urls), path("", views.dashboard)]
