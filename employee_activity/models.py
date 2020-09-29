@@ -57,8 +57,11 @@ class Log(models.Model):
         verbose_name = "لاگ"
         verbose_name_plural = "لاگ‌ها"
 
+    @property
+    def datetime_occured_str(self):
+        return self.datetime_occured.strftime("%a, %d %b %Y %H:%M:%S")
     def __str__(self):
-        return f"{self.datetime_occured} - {self.event_message}"
+        return f"{self.datetime_occured_str} - {self.event_message}"
 
 
 class Activity(models.Model):
@@ -132,4 +135,4 @@ class AvailabilityStatus(LogMixin):
         return self.get_reason_display()
 
     def __str__(self):
-        return f"{self.employee} - {self.reason} - {self.until}"
+        return f"{self.employee} - {self.get_reason_display()} - {self.until}"

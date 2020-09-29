@@ -1,4 +1,5 @@
 {% load static %}
+{% load jformat %}
 <!DOCTYPE html>
 <html>
 
@@ -48,6 +49,8 @@
                             </button>
                         </div>
                         <div class="v-line my-2"></div>
+
+
                         <div>
                             <div class="dropdown w-100">
                                 <button class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
@@ -59,6 +62,8 @@
                                     <span class="dropdown-item" href="#">Another action</span>
                                     <span class="dropdown-item" href="#">Something else here</span>
                                 </div>
+
+
                             </div>
                             <div class="">
                                 <div class="input-group my-2">
@@ -71,6 +76,9 @@
                                 </button>
                             </div>
                         </div>
+
+
+                        
                         <div class="v-line my-2"></div>
                         <div>
                             <div class="dropdown w-100">
@@ -116,7 +124,7 @@
                                         {{log_item.event_message}}
                                     </p>
                                     <div class="text-left pl-2 py-1 dri_ltr">
-                                        <span>10:10 a.m</span>
+                                        <span>{{log.datetime_occured_str}}</span>
                                     </div>
                                 </div>
                                 <div class="position-relative col-2 col-sm-1 px-md-3 order-2 text-md-center">
