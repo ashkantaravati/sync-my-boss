@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "38bc8d67318b9d6c89dcd0f15b69567b269db25ac172d9a60933d3894d672ebf"
+            "sha256": "ce1aec98dcbf98cd2396a81422ec1dcc27db04e6dd6db81e16941ddf7ddcf0e5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -30,6 +30,11 @@
             ],
             "index": "pypi",
             "version": "==3.1.1"
+        },
+        "django-admin-bootstrapped3": {
+            "editable": true,
+            "git": "https://github.com/darrylcousins/django-admin-bootstrapped3.git",
+            "ref": "1a5705f9aed558c251ad635c7805e4caeb1d7d4d"
         },
         "django-jalali": {
             "hashes": [

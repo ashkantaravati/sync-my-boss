@@ -10,6 +10,7 @@ black = "*"
 [packages]
 django = "*"
 django-jalali = "*"
+django-admin-bootstrapped3 = {editable = true,git = "https://github.com/darrylcousins/django-admin-bootstrapped3.git"}
 
 [requires]
 python_version = "3.8"

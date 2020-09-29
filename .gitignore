@@ -108,3 +108,7 @@ venv.bak/
 # IDE-Specific
 .vscode/settings.json
 
+
+
+# Front-end stuff
+.sass-cache

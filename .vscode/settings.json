@@ -1,7 +1,3 @@
 {
-    "python.pythonPath": "/home/ashkan/.local/share/virtualenvs/sync-my-boss-i7NaQXRk/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.pylamaEnabled": true,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black"
+    "python.pythonPath": "/home/ashkan/.local/share/virtualenvs/sync-my-boss-i7NaQXRk/bin/python"
 }

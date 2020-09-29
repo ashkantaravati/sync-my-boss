@@ -1,18 +1,146 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>همه‌ی فعالیت‌ها</title>
+    <title>تابلوی اعلانات سازمانی</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href= "{% static 'css/main.css' %}" />
 </head>
+
 <body>
-    <table>
-        {% for log_item in logs %}
-        <tr>
-            <td>{{log_item.employee}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    
+    <section class="navigation">
+        <nav class="container d-flex h-100">
+            <div class="w-100 d-flex justify-content-between align-items-center">
+                <div class="bord-title font-weight-bold">تابلوی اعلانات سازمانی</div>
+                <div>
+                    <span>{{active_coworkers}}</span>
+                    همکار آنلاین
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section class="my-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
+                    <div>{{username}}</div>
+                    <div class="text-center">
+                        <div class="font-weight-bold">{{status}}</div>
+                        <div>{{latest_update}}</div>
+                    </div>
+                    <div><span>۱۳۹۹/۰۹/۰۹</span> - <span> ۱۳:۱۳</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-3 pr-0">
+                    <div class="side-bar">
+                        <div class="text-left">
+                            <button type="button" class="btn custom-btn gray-bg">
+                                اعلام خروج
+                            </button>
+                        </div>
+                        <div class="v-line my-2"></div>
+                        <div>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
+                                    id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    وضعیت
+                                </button>
+                                <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
+                                    <span class="dropdown-item" href="#">Action</span>
+                                    <span class="dropdown-item" href="#">Another action</span>
+                                    <span class="dropdown-item" href="#">Something else here</span>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="input-group my-2">
+                                    <input type="text" class="form-control" placeholder="زمان بازگشت" />
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn custom-btn cta-bg">
+                                    ارسال
+                                </button>
+                            </div>
+                        </div>
+                        <div class="v-line my-2"></div>
+                        <div>
+                            <div class="dropdown w-100">
+                                <button class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
+                                    id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    نام فعالیت
+                                </button>
+                                <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
+                                    <span class="dropdown-item" href="#">Action</span>
+                                    <span class="dropdown-item" href="#">Another action</span>
+                                    <span class="dropdown-item" href="#">Something else here</span>
+                                </div>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control my-2" placeholder="عنوان کار " />
+                            </div>
+                            <div>
+                                <input type="text" class="form-control my-2" placeholder="زمان تخمینی فعالیت" />
+                            </div>
+                            <div>
+                                <textarea class="form-control my-2" aria-label="With textarea"
+                                    placeholder="توضیحات"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn custom-btn cta-bg">
+                                    ارسال
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9 pl-0">
+                    <div class="main-box">
+                        <div class="timeline">
+                            {% for log_item in logs %}
+
+
+                            <div
+                                class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+                                <div class="col-10 col-md-5 order-3 p-0 order-md-1 timeline-content">
+                                    <span class="username text-light d-block py-1 pr-3">{{log_item.employee}}</span>
+                                    <p class="py-1 px-2">
+                                        {{log_item.event_message}}
+                                    </p>
+                                    <div class="text-left pl-2 py-1 dri_ltr">
+                                        <span>10:10 a.m</span>
+                                    </div>
+                                </div>
+                                <div class="position-relative col-2 col-sm-1 px-md-3 order-2 text-md-center">
+                                    <span class="timeline-circle"></span>
+                                </div>
+                                <div class="col-10 col-md-5 order-1 order-md-3 py-3"></div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 </body>
+
 </html>
