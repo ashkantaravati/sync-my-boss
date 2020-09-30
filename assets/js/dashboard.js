@@ -17,7 +17,7 @@ const timeline = {
         }).catch(error => {
           console.log(response)
         })
-        }, 5000)
+        }, 2000)
     }
   }
   Vue.createApp(timeline).mount("#timeline");
