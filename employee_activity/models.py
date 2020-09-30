@@ -20,7 +20,9 @@ class Employee(models.Model):
     class Meta:
         verbose_name = "کارمند"
         verbose_name_plural = "کارمندان"
-
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.job_title}"
 
@@ -58,10 +60,10 @@ class Log(models.Model):
         verbose_name_plural = "لاگ‌ها"
 
     @property
-    def datetime_occured_str(self):
+    def datetime_occured_formatted(self):
         return self.datetime_occured.strftime("%a, %d %b %Y %H:%M:%S")
     def __str__(self):
-        return f"{self.datetime_occured_str} - {self.event_message}"
+        return f"{self.datetime_occured_formatted} - {self.event_message}"
 
 
 class Activity(models.Model):
