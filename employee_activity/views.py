@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from .serializers import LogSerializer
 from .models import Log
-
+from rest_framework import generics
 
 def dashboard(request):
     if request.method == "GET":
@@ -21,3 +22,7 @@ def dashboard(request):
                 "active_coworkers": active_coworkers,
             },
         )
+
+class LogList(generics.ListAPIView):
+    queryset = Log.objects.all().order_by("-datetime_occured")
+    serializer_class = LogSerializer
