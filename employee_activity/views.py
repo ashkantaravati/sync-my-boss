@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import LogSerializer, AvailabilityStatusSerializer
-from .models import Log, AvailabilityStatus
+from .serializers import LogSerializer, AvailabilityStatusSerializer, EmployeeSerializer
+from .models import Log, AvailabilityStatus, Employee
 from rest_framework import generics
 from jdatetime import datetime
 
@@ -39,3 +39,9 @@ class LogList(generics.ListAPIView):
 class SubmitAvailabilityStatus(generics.CreateAPIView):
     queryset = AvailabilityStatus.objects.all()
     serializer_class = AvailabilityStatusSerializer
+
+
+class GetEmployeeInfo(generics.RetrieveAPIView):
+    queryset = Employee.objects.all()
+    lookup_field = "id"
+    serializer_class = EmployeeSerializer

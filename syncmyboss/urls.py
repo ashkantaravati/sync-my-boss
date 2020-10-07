@@ -9,4 +9,5 @@ urlpatterns = [
     path("", views.dashboard),
     path("api/logs",views.LogList.as_view()),
     path("api/availability-statuses/create",views.SubmitAvailabilityStatus.as_view()),
+    path("api/employee/<int:id>",views.GetEmployeeInfo.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
