@@ -13,6 +13,10 @@
 </head>
 
 <body>
+    <div class="d-none">
+
+        {{ csrf_token }}
+    </div>
     <div id="app">
         <section class="navigation">
             <nav class="container d-flex h-100">
@@ -28,9 +32,12 @@
         <section class="my-3">
             <div class="container">
                 <div class="row">
-                    <div
+                    <div id="statusBar"
+                
                         class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
-                        <div>{{username}}</div>
+                        <!-- <div>{{username}}</div> -->
+                        [[setEmployeeId({{current_employee_id}})]]
+                        <div>[[username]]</div>
                         <div class="text-center">
                             <div class="font-weight-bold">{{status}}</div>
                             <div>{{latest_update}}</div>
@@ -60,8 +67,9 @@
                             <div class="v-line my-2"></div>
 
 
-                            <div>
-                                <div id="availabilityStatus" class="dropdown w-100">
+                            <div id="availabilityStatus">
+                                    [[setEmployeeId({{current_employee_id}})]]
+                                <div class="dropdown w-100">
                                     <select v-model="selected" class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
                                         id="userState" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
@@ -79,7 +87,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn custom-btn cta-bg">
+                                    <button v-on:click="submit" class="btn custom-btn cta-bg">
                                         ارسال
                                     </button>
                                 </div>
@@ -150,7 +158,7 @@
             </div>
         </section>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>

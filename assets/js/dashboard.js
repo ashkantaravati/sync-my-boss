@@ -1,3 +1,36 @@
+let csrfToken = Cookies.get("csrftoken");
+axios.defaults.headers.common['X-CSRFToken'] = csrfToken
+
+const employeeDataMixin = {
+  methods: {
+    setEmployeeId(id) {
+      this.employeeId = id;
+      //   alert(id);
+      //   alert(this.employeeId);
+    }
+  },
+  data() {
+    return {
+      employeeId: 0
+    };
+  }
+};
+const statusBar = {
+  delimiters: ["[[", "]]"],
+  mixins: [employeeDataMixin],
+  data() {
+    return {
+      username: "",
+      currentAvailabilityStatus: "",
+      currentWorkUpdate: "",
+      currentDateTime: ""
+    };
+  },
+  mounted() {
+    this.username = this.globalusername;
+  }
+};
+Vue.createApp(statusBar).mount("#statusBar");
 const timeline = {
   delimiters: ["[[", "]]"],
   data() {
@@ -27,6 +60,7 @@ Vue.createApp(timeline).mount("#timeline");
 
 const availabilityStatus = {
   delimiters: ["[[", "]]"],
+  mixins: [employeeDataMixin],
   data() {
     return {
       options: [
@@ -73,9 +107,25 @@ const availabilityStatus = {
   },
   methods: {
     submit(event) {
+      debugger;
       if (event) {
-        alert(event.target.tagName);
-        // send post request using axios
+        let statusChangeData = {
+          reason: this.selected,
+          until: this.until,
+          employee: this.employeeId
+        };
+
+        console.log(statusChangeData);
+        axios
+          .post("/api/availability-statuses/create", statusChangeData)
+          .then(response => {
+            console.log(response);
+            // this.logs = response.data;
+            // timeline.refreshTimeline()
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
   },
@@ -85,6 +135,7 @@ Vue.createApp(availabilityStatus).mount("#availabilityStatus");
 
 const attendance = {
   delimiters: ["[[", "]]"],
+  mixins: [employeeDataMixin],
   data() {
     return {
       options: [
