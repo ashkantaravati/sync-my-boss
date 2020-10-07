@@ -76,17 +76,7 @@ const availabilityStatus = {
         }
     },
     mounted() {
-        setInterval(() => {
-            axios
-                .get("/api/logs")
-                .then(response => {
-                    console.log(response);
-                    this.logs = response.data;
-                })
-                .catch(error => {
-                    console.log(response);
-                });
-        }, 2000);
+        
     }
 };
 Vue.createApp(availabilityStatus).mount("#availabilityStatus");
@@ -115,17 +105,7 @@ const attendance = {
         }
     },
     mounted() {
-        setInterval(() => {
-            axios
-                .get("/api/logs")
-                .then(response => {
-                    console.log(response);
-                    this.logs = response.data;
-                })
-                .catch(error => {
-                    console.log(response);
-                });
-        }, 2000);
+       
     }
 };
 Vue.createApp(attendance).mount("#attendance");
