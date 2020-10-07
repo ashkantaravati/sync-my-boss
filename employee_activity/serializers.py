@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Log, Employee
+from .models import Log, Employee, AvailabilityStatus
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -20,3 +20,9 @@ class LogSerializer(serializers.ModelSerializer):
             "event_message",
             "event_type",
         ]
+
+
+class AvailabilityStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailabilityStatus
+        fields = "__all__"

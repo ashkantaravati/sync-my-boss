@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .serializers import LogSerializer
-from .models import Log
+from .serializers import LogSerializer, AvailabilityStatusSerializer
+from .models import Log, AvailabilityStatus
 from rest_framework import generics
 from jdatetime import datetime
 
@@ -34,3 +34,8 @@ def dashboard(request):
 class LogList(generics.ListAPIView):
     queryset = Log.objects.all().order_by("-datetime_occured")
     serializer_class = LogSerializer
+
+
+class SubmitAvailabilityStatus(generics.CreateAPIView):
+    queryset = AvailabilityStatus.objects.all()
+    serializer_class = AvailabilityStatusSerializer
