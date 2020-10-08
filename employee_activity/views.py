@@ -22,8 +22,6 @@ def dashboard(request):
                 "employee_activity/dashboard.html",
                 {
                     "current_employee_id": current_employee_id,
-                    "status": status,
-                    "latest_update": latest_update,
                     "active_coworkers": active_coworkers,
                     "today": today,
                 },

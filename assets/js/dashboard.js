@@ -20,14 +20,24 @@ const statusBar = {
   mixins: [employeeDataMixin],
   data() {
     return {
-      username: "",
-      currentAvailabilityStatus: "",
+      employeeName: "",
+      currentAvailabilityStatus: "Available",
+      currentAvailabilityStatusText: "",
       currentWorkUpdate: "",
       currentDateTime: ""
     };
   },
   mounted() {
-    this.username = this.globalusername;
+    // this.username = this.globalusername;
+    axios.get(`/api/employee/${this.employeeId}`)
+    .then(response=>{
+        let employee = response.data;
+        this.employeeName = employee.full_name;
+        this.currentAvailabilityStatus = employee.current_availability_status;
+        this.currentAvailabilityStatusText = employee.current_availability_status_text;
+        this.currentWorkUpdate = employee.current_work_update;
+        
+    })
   }
 };
 Vue.createApp(statusBar).mount("#statusBar");
