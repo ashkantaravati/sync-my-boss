@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'iransans';
-  src: url("/content/fonts/IransansFaNum/ttf/IRANSansWebFaNum.ttf"), url("/content/fonts/IransansFaNum/eot/IRANSansWebFaNum.eot"), url("/content/fonts/IransansFaNum/woff/IRANSansWebFaNum.woff"), url("/content/fonts/woff2/IransansFaNum/IRANSansWebFaNum.woff2"); }
+  src: url("/static/fonts/IransansFaNum/ttf/IRANSansWebFaNum.ttf"), url("/static/fonts/IransansFaNum/eot/IRANSansWebFaNum.eot"), url("/static/fonts/IransansFaNum/woff/IRANSansWebFaNum.woff"), url("/static/fonts/woff2/IransansFaNum/IRANSansWebFaNum.woff2"); }
 body {
   font-family: 'iransans' !important;
   box-sizing: border-box;
