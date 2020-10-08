@@ -20,16 +20,46 @@ class Employee(models.Model):
     class Meta:
         verbose_name = "کارمند"
         verbose_name_plural = "کارمندان"
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.job_title}"
+
+    @property
+    def current_availability_status(self):
+        return (
+            AvailabilityStatus.objects.filter(employee=self)
+            .order_by("-datetime_occured")
+            .first()
+            .reason
+        )
+
+    @property
+    def current_availability_status_text(self):
+        return (
+            AvailabilityStatus.objects.filter(employee=self)
+            .order_by("-datetime_occured")
+            .first()
+            .get_reason_display()
+        )
+
+    @property
+    def curren_work_update(self):
+        return (
+            WorkUpdate.objects.filter(employee=self)
+            .order_by("-datetime_occured")
+            .first()
+            .__str__()
+        )
 
 
 class LogMixin(models.Model):
     log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True)
     employee = models.ForeignKey("Employee", on_delete=models.CASCADE, default=1)
+    datetime_occured = jmodels.jDateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
@@ -62,6 +92,7 @@ class Log(models.Model):
     @property
     def datetime_occured_formatted(self):
         return self.datetime_occured.strftime("%a, %d %b %Y %H:%M:%S")
+
     def __str__(self):
         return f"{self.datetime_occured_formatted} - {self.event_message}"
 
