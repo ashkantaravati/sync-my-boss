@@ -5,7 +5,16 @@ from .models import Log, Employee, AvailabilityStatus, Workplace, Attendance
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ["first_name", "last_name", "job_title", "user", "full_name"]
+        fields = [
+            "first_name",
+            "last_name",
+            "job_title",
+            "user",
+            "full_name",
+            "current_availability_status",
+            "current_availability_status_text",
+            "curren_work_update"
+        ]
 
 
 class LogSerializer(serializers.ModelSerializer):
@@ -33,8 +42,8 @@ class WorkplaceSerializer(serializers.ModelSerializer):
         model = Workplace
         fields = ["id", "name"]
 
+
 class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
-        fields = ["employee", "action_type","workplace"]
-        
+        fields = ["employee", "action_type", "workplace"]
