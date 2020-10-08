@@ -121,6 +121,7 @@ Pull Requests are welcome.
 - [Introduction to Vue.js v3](https://v3.vuejs.org/guide/introduction.html)
 - [About Django Cross Site Request Forgery protection](https://docs.djangoproject.com/en/3.1/ref/csrf/#module-django.middleware.csrf)
 - [Axios README](https://github.com/axios/axios)
+- [About Python virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 
 ### FAQ
 1. Q: Why am I getting HTTP 403 58 response?
