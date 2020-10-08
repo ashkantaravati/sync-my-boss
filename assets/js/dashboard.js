@@ -1,5 +1,5 @@
 let csrfToken = Cookies.get("csrftoken");
-axios.defaults.headers.common['X-CSRFToken'] = csrfToken
+axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 
 const employeeDataMixin = {
   methods: {
@@ -150,22 +150,30 @@ const attendance = {
       ],
       entered: false,
       workplaceOptions: [],
-      selectedWorkplace:0
+      selectedWorkplace: 1
     };
   },
   methods: {
-    submit(event) {
+    setAttendance(event) {
       if (event) {
-        // send post request using axios
-        this.entered = !this.entered;
+        let requestedAction = this.entered ? "Exit" : "Enter";
+        axios
+          .post("/api/attendance/set", {
+            employee: this.employeeId,
+            action_type: requestedAction,
+            workplace: this.selectedWorkplace
+          })
+          .then(response => {
+            this.entered = response.data.action_type == "Enter" ? true : false;
+            this.selectedWorkplace = response.data.workplace;
+          });
       }
     }
   },
   mounted() {
-      axios.get('/api/workplace/all')
-      .then(response => {
-          this.workplaceOptions = response.data;
-      })
+    axios.get("/api/workplace/all").then(response => {
+      this.workplaceOptions = response.data;
+    });
   }
 };
 Vue.createApp(attendance).mount("#attendance");
