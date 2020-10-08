@@ -13,7 +13,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "full_name",
             "current_availability_status",
             "current_availability_status_text",
-            "current_work_update"
+            "current_availability_status_class",
+            "current_work_update",
         ]
 
 

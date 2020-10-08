@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_jalali.db import models as jmodels
+from .utils import get_kebab_case
 
 # from .model_mixins import LogMixin
 from .value_choices import (
@@ -54,6 +55,10 @@ class Employee(models.Model):
             .first()
             .__str__()
         )
+
+    @property
+    def current_availability_status_class(self):
+        return get_kebab_case(self.current_availability_status)
 
 
 class LogMixin(models.Model):
