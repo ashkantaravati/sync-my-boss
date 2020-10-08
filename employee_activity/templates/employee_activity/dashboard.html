@@ -1,5 +1,4 @@
-{% load static %}
-{% load jformat %}
+{% load static %} {% load jformat %}
 <!DOCTYPE html>
 <html>
 
@@ -14,14 +13,15 @@
 
 <body>
     <div class="d-none">
-
         {{ csrf_token }}
     </div>
     <div id="app">
         <section class="navigation">
             <nav class="container d-flex h-100">
                 <div class="w-100 d-flex justify-content-between align-items-center">
-                    <div class="bord-title font-weight-bold">تابلوی اعلانات سازمانی</div>
+                    <div class="bord-title font-weight-bold">
+                        تابلوی اعلانات سازمانی
+                    </div>
                     <div>
                         <span>{{active_coworkers}}</span>
                         همکار آنلاین
@@ -33,7 +33,6 @@
             <div class="container">
                 <div class="row">
                     <div id="statusBar"
-                
                         class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
                         <!-- <div>{{username}}</div> -->
                         [[setEmployeeId({{current_employee_id}})]]
@@ -42,9 +41,7 @@
                             <div class="font-weight-bold">{{status}}</div>
                             <div>{{latest_update}}</div>
                         </div>
-                        <div>
-                            <span>{{today}}</span> - <span> ۱۳:۱۳</span>
-                        </div>
+                        <div><span>{{today}}</span> - <span> ۱۳:۱۳</span></div>
                     </div>
                 </div>
             </div>
@@ -55,35 +52,46 @@
                     <div class="col-3 pr-0">
                         <div class="side-bar">
                             <div id="attendance" class="text-left">
+                                    [[setEmployeeId({{current_employee_id}})]]
+                                    <div class="dropdown w-100">
+                                        <select v-model="selectedWorkplace"
+                                            class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
+                                            id="userState" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false" :disabled="entered">
+                                            <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
+                                                <option v-for="option in workplaceOptions" v-bind:value="option.id"><span
+                                                        class="dropdown-item">[[ option.name ]]</span></option>
+                                            </div>
+                                        </select>
+                                    </div>
                                 <button type="button" @click="submit" class="btn custom-btn gray-bg">
                                     <template v-if="entered">
-  اعلام خروج
-</template>
- <template v-else>
-  اعلام ورود
-</template>
+                                        اعلام خروج
+                                    </template>
+                                    <template v-else>
+                                        اعلام ورود
+                                    </template>
                                 </button>
                             </div>
                             <div class="v-line my-2"></div>
 
-
                             <div id="availabilityStatus">
-                                    [[setEmployeeId({{current_employee_id}})]]
+                                [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
-                                    <select v-model="selected" class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
+                                    <select v-model="selected"
+                                        class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
                                         id="userState" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
-                                            <option v-for="option in options" v-bind:value="option.reason"><span class="dropdown-item">[[ option.reason_display ]]</span></option>
-                                            </option>>
+                                            <option v-for="option in options" v-bind:value="option.reason"><span
+                                                    class="dropdown-item">[[ option.reason_display ]]</span></option>
                                         </div>
                                     </select>
-
-
                                 </div>
                                 <div class="">
                                     <div class="input-group my-2">
-                                        <input type="text" v-model="until" class="form-control" placeholder="زمان بازگشت" />
+                                        <input type="text" v-model="until" class="form-control"
+                                            placeholder="زمان بازگشت" />
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -92,8 +100,6 @@
                                     </button>
                                 </div>
                             </div>
-
-
 
                             <div class="v-line my-2"></div>
                             <div>
@@ -123,7 +129,6 @@
                                     <button type="button" class="btn custom-btn cta-bg">
                                         ارسال
                                     </button>
-
                                 </div>
                             </div>
                         </div>
@@ -131,8 +136,6 @@
                     <div class="col-9 pl-0">
                         <div class="main-box">
                             <div id="timeline" class="timeline">
-
-
                                 <div v-for="log in logs"
                                     class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
                                     <div class="col-10 col-md-5 order-3 p-0 order-md-1 timeline-content">
@@ -150,7 +153,6 @@
                                     </div>
                                     <div class="col-10 col-md-5 order-1 order-md-3 py-3"></div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -173,7 +175,6 @@
         integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
         crossorigin="anonymous"></script>
     <script src="{% static 'js/dashboard.js' %}"></script>
-
 </body>
 
 </html>

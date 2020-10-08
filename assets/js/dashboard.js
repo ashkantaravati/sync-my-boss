@@ -149,7 +149,8 @@ const attendance = {
         }
       ],
       entered: false,
-      workplace: ""
+      workplaceOptions: [],
+      selectedWorkplace:0
     };
   },
   methods: {
@@ -160,6 +161,11 @@ const attendance = {
       }
     }
   },
-  mounted() {}
+  mounted() {
+      axios.get('/api/workplace/all')
+      .then(response => {
+          this.workplaceOptions = response.data;
+      })
+  }
 };
 Vue.createApp(attendance).mount("#attendance");
