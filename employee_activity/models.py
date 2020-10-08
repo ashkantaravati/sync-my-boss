@@ -47,7 +47,7 @@ class Employee(models.Model):
         )
 
     @property
-    def curren_work_update(self):
+    def current_work_update(self):
         return (
             WorkUpdate.objects.filter(employee=self)
             .order_by("-datetime_occured")
