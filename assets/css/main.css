@@ -51,7 +51,9 @@ p {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.15);
-  padding: 1rem; }
+  padding: 1rem;
+  position: fixed;
+ }
 
 .custom-btn {
   border-radius: 5px;
