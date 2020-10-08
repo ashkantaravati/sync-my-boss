@@ -4,6 +4,10 @@
 
 <head>
     <title>تابلوی اعلانات سازمانی</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
@@ -52,18 +56,18 @@
                     <div class="col-3 pr-0">
                         <div class="side-bar">
                             <div id="attendance" class="text-left">
-                                    [[setEmployeeId({{current_employee_id}})]]
-                                    <div class="dropdown w-100">
-                                        <select v-model="selectedWorkplace"
-                                            class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
-                                            id="userState" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false" :disabled="entered">
-                                            <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
-                                                <option v-for="option in workplaceOptions" v-bind:value="option.id"><span
-                                                        class="dropdown-item">[[ option.name ]]</span></option>
-                                            </div>
-                                        </select>
-                                    </div>
+                                [[setEmployeeId({{current_employee_id}})]]
+                                <div class="dropdown w-100">
+                                    <select v-model="selectedWorkplace"
+                                        class="btn btn-secondary dropdown-toggle w-100 text-right" type="button"
+                                        id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        :disabled="entered">
+                                        <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
+                                            <option v-for="option in workplaceOptions" v-bind:value="option.id"><span
+                                                    class="dropdown-item">[[ option.name ]]</span></option>
+                                        </div>
+                                    </select>
+                                </div>
                                 <button type="button" @click="submit" class="btn custom-btn gray-bg">
                                     <template v-if="entered">
                                         اعلام خروج
