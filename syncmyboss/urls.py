@@ -6,6 +6,7 @@ from employee_activity.apis import (
     SubmitAvailabilityStatus,
     GetEmployeeInfo,
     GetWorkplaces,
+    SetAttendance
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -17,6 +18,7 @@ urlpatterns = [
     path("api/availability-statuses/create", SubmitAvailabilityStatus.as_view()),
     path("api/employee/<int:id>", GetEmployeeInfo.as_view()),
     path("api/workplace/all", GetWorkplaces.as_view()),
+    path("api/attendance/set", SetAttendance.as_view()),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

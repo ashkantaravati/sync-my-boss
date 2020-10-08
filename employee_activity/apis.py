@@ -3,8 +3,9 @@ from .serializers import (
     AvailabilityStatusSerializer,
     EmployeeSerializer,
     WorkplaceSerializer,
+    AttendanceSerializer,
 )
-from .models import Log, AvailabilityStatus, Employee, Workplace
+from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance
 from rest_framework import generics
 
 
@@ -27,3 +28,8 @@ class GetEmployeeInfo(generics.RetrieveAPIView):
 class GetWorkplaces(generics.ListAPIView):
     queryset = Workplace.objects.all()
     serializer_class = WorkplaceSerializer
+
+
+class SetAttendance(generics.CreateAPIView):
+    queryset = Attendance.objects.all()
+    serializer_class = AttendanceSerializer
