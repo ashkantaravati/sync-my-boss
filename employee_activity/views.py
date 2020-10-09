@@ -14,8 +14,6 @@ def dashboard(request):
             current_employee_id = current_employee.pk
             today = datetime.now().strftime("%a, %d %b %Y")
             active_coworkers = 21
-            latest_update = "شروع کار - پروژه‌ی آذرگستر - تغییر سایز هدر"
-            status = "ترک میز برای ناهار"
 
             return render(
                 request,
