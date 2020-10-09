@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_jalali.db import models as jmodels
-from .utils import get_kebab_case
+from .utils import get_kebab_case, get_formatted_jdatetime
 
 # from .model_mixins import LogMixin
 from .value_choices import (
@@ -96,7 +96,7 @@ class Log(models.Model):
 
     @property
     def datetime_occured_formatted(self):
-        return self.datetime_occured.strftime("%a, %d %b %Y %H:%M:%S")
+        return get_formatted_jdatetime(self.datetime_occured)
 
     def __str__(self):
         return f"{self.datetime_occured_formatted} - {self.event_message}"
@@ -172,5 +172,10 @@ class AvailabilityStatus(LogMixin):
     def get_type_info(self):
         return self.get_reason_display()
 
+    @property
+    def until_formatted(self):
+        formatted_datetime = get_formatted_jdatetime(self.until)
+        return formatted_datetime
+
     def __str__(self):
-        return f"{self.employee} - {self.get_reason_display()} - {self.until}"
+        return f"{self.employee} - {self.get_reason_display()} تا {self.until_formatted}"
