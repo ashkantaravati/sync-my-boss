@@ -35,8 +35,8 @@
         </section>
         <section class="my-3">
             <div class="container">
-                <div class="row">
-                    <div id="statusBar"
+                <div class="row" id="statusBar">
+                    <div  v-bind:class="classObject"
                         class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
                         <!-- <div>{{username}}</div> -->
                         [[setEmployeeId({{current_employee_id}})]]
