@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .serializers import LogSerializer, AvailabilityStatusSerializer, EmployeeSerializer
 from .models import Log, AvailabilityStatus, Employee
 from rest_framework import generics
-from jdatetime import datetime
+from .utils import get_today_formatted_jdatetime
 
 
 def dashboard(request):
@@ -21,7 +21,7 @@ def dashboard(request):
                 {
                     "current_employee_id": current_employee_id,
                     "active_coworkers": active_coworkers,
-                    "today": today,
+                    "today": get_today_formatted_jdatetime(),
                 },
             )
         else:
