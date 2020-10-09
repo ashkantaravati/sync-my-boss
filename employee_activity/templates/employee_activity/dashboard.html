@@ -40,7 +40,7 @@
                         class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
                         <!-- <div>{{username}}</div> -->
                         [[setEmployeeId({{current_employee_id}})]]
-                        <div>[[employeeName]]</div>
+                        <div>[[employeeName]] <a class="text-danger" href="{% url 'logout' %}">(خروج)</a></div>
                         <div class="text-center">
                             <div class="font-weight-bold">[[currentAvailabilityStatusText]]</div>
                             <div>[[currentWorkUpdate]]</div>
