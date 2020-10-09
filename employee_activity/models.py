@@ -9,6 +9,8 @@ from .value_choices import (
     ATTENDANCE_ACTION_TYPES,
     AVAILABILITY_STATUS_REASON_TYPES,
     ACTIVITY_TYPES,
+    DAYLONG_STATUS_TYPES,
+    INDEFINITE_STATUS_TYPES,
 )
 
 
@@ -174,8 +176,14 @@ class AvailabilityStatus(LogMixin):
 
     @property
     def until_formatted(self):
-        formatted_datetime = get_formatted_jdatetime(self.until)
+        object_type = "date" if self.reason in DAYLONG_STATUS_TYPES else "datetime"
+        formatted_datetime = get_formatted_jdatetime(
+            self.until, object_type=object_type, show_seconds=False
+        )
         return formatted_datetime
 
     def __str__(self):
-        return f"{self.employee} - {self.get_reason_display()} تا {self.until_formatted}"
+        until_details = (
+            "" if self.reason in INDEFINITE_STATUS_TYPES else f" تا {self.until_formatted}"
+        )
+        return f"{self.employee} - {self.get_reason_display()} {until_details}"

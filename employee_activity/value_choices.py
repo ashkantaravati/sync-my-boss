@@ -23,6 +23,9 @@ AVAILABILITY_STATUS_REASON_TYPES = (
     ("Away for a meal", "ترک میز برای صرف وعده‌ی غذایی"),
 )
 
+DAYLONG_STATUS_TYPES = ["On Daily Leave"]
+INDEFINITE_STATUS_TYPES = ["Available","Left Work"]
+
 ACTIVITY_TYPES = (
     ("Sales", "فروش"),
     ("Marketing", "بازاریابی"),
