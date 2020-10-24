@@ -1,0 +1,9 @@
+-i https://pypi.org/simple
+-e git+https://github.com/darrylcousins/django-admin-bootstrapped3.git@1a5705f9aed558c251ad635c7805e4caeb1d7d4d#egg=django-admin-bootstrapped3
+asgiref==3.2.10
+django-jalali==4.0.0
+django==3.1.1
+djangorestframework==3.12.1
+jdatetime==3.6.2
+pytz==2020.1
+sqlparse==0.3.1
