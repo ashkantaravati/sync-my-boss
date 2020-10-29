@@ -137,7 +137,7 @@ class WorkUpdate(LogMixin):
 
 
 class Workplace(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40, verbose_name="مکان")
 
     class Meta:
         verbose_name = "محل کار"
