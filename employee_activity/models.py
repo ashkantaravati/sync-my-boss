@@ -15,10 +15,10 @@ from .value_choices import (
 
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    job_title = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100, verbose_name="نام")
+    last_name = models.CharField(max_length=100, verbose_name="نام خانوادگی")
+    job_title = models.CharField(max_length=100, verbose_name="عنوان شغل")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="کاربر")
 
     class Meta:
         verbose_name = "کارمند"
