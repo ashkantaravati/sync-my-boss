@@ -71,11 +71,31 @@ cd sync-my-boss
 ```sh
 pipenv install --dev
 ```
+
+note: If you prefer to use virtualenv, having installed virtualenv using pip, enter the following command to create a virtual environment:
+
+```sh
+virtualenv env
+```
+
 4. Then activate the virtual environment using the following command:
 
 ```sh
 pipenv shell
 ```
+
+Note: For virtualenv, use one of the following commands according to your terminal type:
+```sh
+source env/bin/activate # for bash/zsh/ etc.
+env\Scripts\activate.ps1 # for powershell
+env\Scripts\activate.bat # for Command Prompt
+```
+You can now install dependencies from the `requirements.txt` file using pip.
+
+```sh
+pip install -r requirements.txt
+```
+
 5. Now prepare the database using the commands below
 
 ```sh
