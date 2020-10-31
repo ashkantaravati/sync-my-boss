@@ -116,6 +116,16 @@
                                         </div>
                                     </select>
                                 </div>
+                                <div class="dropdown w-100">
+                                    <select v-model="selectedActivity"
+                                        class="btn btn-secondary dropdown-toggle w-100 text-right" id="userState"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
+                                            <option v-for="activity in activities" v-bind:value="activity.id"><span
+                                                    class="dropdown-item">[[ activity.name ]]</span></option>
+                                        </div>
+                                    </select>
+                                </div>
                                 <div>
                                     <input type="text" class="form-control my-2" placeholder="عنوان کار " />
                                 </div>
