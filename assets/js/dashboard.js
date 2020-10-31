@@ -216,13 +216,21 @@ const workUpdate = {
     data() {
         return {
             updateTypeOptions : [],
-            selectedUpdateType : "Work Started"
+            selectedUpdateType : "Work Started",
+
+            activities : [],
+            selectedActivity: 0
         };
     },
     mounted(){
         axios.get("/api/types/workupdate").then(response => {
             this.updateTypeOptions = response.data;
         }).catch(error=>console.log(error));
+
+        axios.get("/api/activity/all-active").then(response => {
+            this.activities = response.data;
+            this.selectedActivity = this.activities.length ? this.activities[0].id : 0;
+        })
     }
 };
 Vue.createApp(workUpdate).mount("#workUpdate");
