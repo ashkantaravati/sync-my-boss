@@ -107,11 +107,11 @@
                             <div class="v-line my-2"></div>
                             <div id="workUpdate">
                                 <div class="dropdown w-100">
-                                    <select v-model="selected"
+                                    <select v-model="selectedUpdateType"
                                         class="btn btn-secondary dropdown-toggle w-100 text-right" id="userState"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
-                                            <option v-for="option in options" v-bind:value="option.update_type"><span
+                                            <option v-for="option in updateTypeOptions" v-bind:value="option.update_type"><span
                                                     class="dropdown-item">[[ option.update_type_display ]]</span></option>
                                         </div>
                                     </select>

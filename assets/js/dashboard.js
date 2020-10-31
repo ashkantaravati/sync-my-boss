@@ -215,13 +215,13 @@ const workUpdate = {
     mixins: [employeeDataMixin],
     data() {
         return {
-            options : [],
-            selected : "Work Started"
+            updateTypeOptions : [],
+            selectedUpdateType : "Work Started"
         };
     },
     mounted(){
         axios.get("/api/types/workupdate").then(response => {
-            this.options = response.data;
+            this.updateTypeOptions = response.data;
         }).catch(error=>console.log(error));
     }
 };
