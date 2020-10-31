@@ -4,8 +4,9 @@ from .serializers import (
     EmployeeSerializer,
     WorkplaceSerializer,
     AttendanceSerializer,
+    ActivitySerializer,
 )
-from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance
+from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, Activity
 from rest_framework import generics, authentication, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -40,6 +41,14 @@ class SetAttendance(generics.CreateAPIView):
 
 
 class WorkUpdateTypes(APIView):
-    def get(self,request):
-        update_types = [{"update_type":update_type[0],"update_type_display":update_type[1]} for update_type in WORK_UPDATE_TYPES]
+    def get(self, request):
+        update_types = [
+            {"update_type": update_type[0], "update_type_display": update_type[1]}
+            for update_type in WORK_UPDATE_TYPES
+        ]
         return Response(update_types)
+
+
+class GetActivities(generics.ListAPIView):
+    queryset = Activity.objects.filter(is_archived=False)
+    serializer_class= ActivitySerializer
