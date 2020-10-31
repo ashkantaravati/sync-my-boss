@@ -209,3 +209,20 @@ const attendance = {
     }
 };
 Vue.createApp(attendance).mount("#attendance");
+
+const workUpdate = {
+    delimiters: ["[[", "]]"],
+    mixins: [employeeDataMixin],
+    data() {
+        return {
+            options : [],
+            selected : "Work Started"
+        };
+    },
+    mounted(){
+        axios.get("/api/types/workupdate").then(response => {
+            this.options = response.data;
+        }).catch(error=>console.log(error));
+    }
+};
+Vue.createApp(workUpdate).mount("#workUpdate");
