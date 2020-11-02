@@ -88,9 +88,9 @@ class LogMixin(models.Model):
 class Log(models.Model):
     objects = jmodels.jManager()
     datetime_occured = jmodels.jDateTimeField(auto_now_add=True)
-    employee = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True)
-    event_message = models.TextField()
-    event_type = models.CharField(max_length=40)
+    employee = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, verbose_name="کارمند")
+    event_message = models.TextField(verbose_name="موضوع لاگ")
+    event_type = models.CharField(max_length=40, verbose_name="نوع لاگ")
 
     class Meta:
         verbose_name = "لاگ"
