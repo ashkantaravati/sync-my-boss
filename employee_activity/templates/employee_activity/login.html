@@ -29,36 +29,43 @@
 
     <div class="w-100 mx-auto my-0">
         <div class="container-login100">
-            <div class="wrap-login100 align-items-center">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img src="{% static 'img/user-profile.png' %}" alt="IMG">
+
+            <div class="wrap-login100 align-items-center flex-column">
+
+                <div class="bord-title font-weight-bold mb-3">
+                            به سامانه‌ی یکپارچه‌ی گردش اطلاعات سازمانی خوش آمدید
                 </div>
 
-                <form class="login100-form validate-form" method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <span class="login100-form-title">
-		به سامانه‌ی یکپارچه‌ی گردش اطلاعات سازمانی خوش آمدید
-					</span>
-
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <!-- <input class="input100" type="text" name="email" placeholder="Email"> -->
-                        {{ form.username }}
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-
+                <div class="d-flex align-items-center  justify-content-around flex-row-reverse w-100">
+                    <div class="login100-pic js-tilt" data-tilt>
+                        <img src="{% static 'img/user-profile.png' %}" alt="IMG">
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
-                        {{ form.password }}
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
+                    <form class="login100-form validate-form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <p class="bord-title pb-4 text-center">
+                            ورود به سامانه
+                        </p>
+
+                        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                            <!-- <input class="input100" type="text" name="email" placeholder="Email"> -->
+                            {{ form.username }}
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
 
-                    </div>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                            {{ form.password }}
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+
+                        </div>
 
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn" value="login">
@@ -69,7 +76,7 @@
                 </form>
                 <!-- {# Assumes you setup the password_reset view in your URLconf #}
                 <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
-
+                </div>
             </div>
         </div>
     </div>
