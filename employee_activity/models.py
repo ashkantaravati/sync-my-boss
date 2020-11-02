@@ -148,8 +148,8 @@ class Workplace(models.Model):
 
 
 class Attendance(LogMixin):
-    workplace = models.ForeignKey("Workplace", on_delete=models.SET_NULL, null=True)
-    action_type = models.CharField(max_length=10, choices=ATTENDANCE_ACTION_TYPES)
+    workplace = models.ForeignKey("Workplace", on_delete=models.SET_NULL, null=True, verbose_name= "محل کار")
+    action_type = models.CharField(max_length=10, choices=ATTENDANCE_ACTION_TYPES, verbose_name="نوع فعالیت")
 
     class Meta:
         verbose_name = "سابقه‌ی حضور و غیاب"
