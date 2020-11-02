@@ -164,8 +164,8 @@ class Attendance(LogMixin):
 
 class AvailabilityStatus(LogMixin):
     objects = jmodels.jManager()
-    reason = models.CharField(max_length=20, choices=AVAILABILITY_STATUS_REASON_TYPES)
-    until = jmodels.jDateTimeField()
+    reason = models.CharField(max_length=20, choices=AVAILABILITY_STATUS_REASON_TYPES, verbose_name="وضعیت")
+    until = jmodels.jDateTimeField(verbose_name="مدت زمان")
 
     class Meta:
         verbose_name = "وضعیت کارمند"
