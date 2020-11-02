@@ -61,9 +61,10 @@
                     </div>
 
                     <div class="container-login100-form-btn">
-                        <button type="submit" class="login100-form-btn">
+                        <button type="submit" class="login100-form-btn" value="login">
 							ورود
 						</button>
+                        <input type="hidden" name="next" value="{{ next }}">
                     </div>
                 </form>
                 <!-- {# Assumes you setup the password_reset view in your URLconf #}
