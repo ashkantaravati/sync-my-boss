@@ -76,9 +76,8 @@
                             <div id="availabilityStatus">
                                 [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
+
                                     <select v-model="selected" class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        
-                                        <select v-model="selected" class="btn btn-secondary dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
                                             <option v-for="option in options" v-bind:value="option.reason"><span
                                                     class="dropdown-item">[[ option.reason_display ]]</span></option>
@@ -101,8 +100,6 @@
                             <div>
                                 <div class="dropdown w-100">
                                     <button class="btn dropdown-style dropdown-toggle w-100 text-right" type="button" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                        <button class="btn btn-secondary dropdown-toggle w-100 text-right" type="button" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         نام فعالیت
                                     </button>
                                     <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
