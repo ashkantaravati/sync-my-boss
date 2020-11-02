@@ -5,7 +5,7 @@ from .serializers import (
     WorkplaceSerializer,
     AttendanceSerializer,
 )
-from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance
+from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, WorkUpdate
 from rest_framework import generics
 
 

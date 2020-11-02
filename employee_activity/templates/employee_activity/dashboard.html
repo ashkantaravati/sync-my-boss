@@ -50,7 +50,7 @@
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-3 pr-0">
+                    <div class="col-3 px-0">
                         <div class="side-bar">
                             <div id="attendance" class="text-center">
                                 [[setEmployeeId({{current_employee_id}})]]
@@ -77,6 +77,8 @@
                                 [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
                                     <select v-model="selected" class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        
+                                        <select v-model="selected" class="btn btn-secondary dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
                                             <option v-for="option in options" v-bind:value="option.reason"><span
                                                     class="dropdown-item">[[ option.reason_display ]]</span></option>
@@ -99,6 +101,8 @@
                             <div>
                                 <div class="dropdown w-100">
                                     <button class="btn dropdown-style dropdown-toggle w-100 text-right" type="button" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                        <button class="btn btn-secondary dropdown-toggle w-100 text-right" type="button" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         نام فعالیت
                                     </button>
                                     <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
@@ -130,6 +134,7 @@
                                 <div v-for="log in logs" class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
                                     <div class="col-10 col-md-5 order-3 p-0 order-md-1 timeline-content">
                                         <span class="username d-block py-1 pr-3">[[log.employee.full_name]]</span>
+                                        <span class="username text-light d-block py-1 pr-3">[[log.employee.full_name]]</span>
                                         <p class="py-1 px-2">
                                             [[log.event_message]]
                                         </p>

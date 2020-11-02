@@ -10,6 +10,7 @@ from employee_activity.apis import (
 )
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -19,6 +20,7 @@ urlpatterns = [
     path("api/employee/<int:id>", GetEmployeeInfo.as_view()),
     path("api/workplace/all", GetWorkplaces.as_view()),
     path("api/attendance/set", SetAttendance.as_view()),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='employee_activity/login.html')),
     path("accounts/", include("django.contrib.auth.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
