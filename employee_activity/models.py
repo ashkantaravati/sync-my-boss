@@ -105,9 +105,9 @@ class Log(models.Model):
 
 
 class Activity(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name="موضوع فعالیت")
     activity_type = models.CharField(
-        max_length=50, choices=ACTIVITY_TYPES, default="Standard"
+        max_length=50, choices=ACTIVITY_TYPES, default="Standard", verbose_name="نوع فعالیت"
     )
 
     class Meta:
