@@ -119,11 +119,11 @@ class Activity(models.Model):
 
 
 class WorkUpdate(LogMixin):
-    update_type = models.CharField(max_length=20, choices=WORK_UPDATE_TYPES)
-    activity = models.ForeignKey("Activity", on_delete=models.SET_NULL, null=True)
-    work_title = models.CharField(max_length=200)
-    notes = models.TextField(null=True, blank=True)
-    estimated_remaining_time = models.DurationField()
+    update_type = models.CharField(max_length=20, choices=WORK_UPDATE_TYPES, verbose_name="نوع اعلان")
+    activity = models.ForeignKey("Activity", on_delete=models.SET_NULL, null=True, verbose_name="فعالیت")
+    work_title = models.CharField(max_length=200, verbose_name="عنوان کار")
+    notes = models.TextField(null=True, blank=True, verbose_name="یادداشت")
+    estimated_remaining_time = models.DurationField(verbose_name="زمان تقریبی باقی مانده")
 
     class Meta:
         verbose_name = "اعلان کاری"
