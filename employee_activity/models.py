@@ -64,9 +64,9 @@ class Employee(models.Model):
 
 
 class LogMixin(models.Model):
-    log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True)
-    employee = models.ForeignKey("Employee", on_delete=models.CASCADE, default=1)
-    datetime_occured = jmodels.jDateTimeField(auto_now_add=True)
+    log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True, verbose_name="لاگ مربوطه")
+    employee = models.ForeignKey("Employee", on_delete=models.CASCADE, default=1, verbose_name="کارمند")
+    datetime_occured = jmodels.jDateTimeField(auto_now_add=True, verbose_name="تاریخ")
 
     class Meta:
         abstract = True
