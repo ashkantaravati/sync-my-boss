@@ -1,0 +1,30 @@
+body {
+    font-family: 'iransans' !important;
+    box-sizing: border-box;
+    margin: 0;
+    direction: rtl;
+    font-size: 14px;
+    line-height: 24px;
+    background-color: #E6E6E6;
+    text-align: right
+}
+
+:focus {
+    outline: 0px solid transparent !important
+}
+
+p {
+    margin: 0
+}
+
+.dri-rtl {
+    direction: rtl
+}
+
+.dri-ltr {
+    direction: ltr
+}
+
+.w-50 {
+    width: 50%
+}
