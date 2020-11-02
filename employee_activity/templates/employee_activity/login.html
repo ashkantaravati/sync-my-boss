@@ -20,11 +20,11 @@
 <body>
 
     {% block content %} {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
+    <p>نام کاربری و گذرواژه‌ی شما صحیح نیست</p>
     {% endif %} {% if next %} {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+    <p>حساب کاربری شما به این صفحه دسترسی ندارد. برای ادامه با حساب دیگری که اجازه‌ی دسترسی به این صفحه‌ها را دارد وارد شوید.</p>
     {% else %}
-    <p>Please login to see this page.</p>
+    <p>برای مشاهده‌ی این صفحه باید به حساب خود وارد شوید</p>
     {% endif %} {% endif %}
 
     <div class="w-100 mx-auto my-0">
