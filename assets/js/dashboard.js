@@ -57,15 +57,15 @@ const statusBar = {
     computed: {
         classObject() {
             return {
-                "bg-success": this.statusClass === "available",
+                "green-bg": this.statusClass === "available",
                 "bg-info": this.statusClass === "focusing",
-                "bg-warning": this.statusClass === "away",
-                "bg-primary": this.statusClass === "away-for-a-meal",
+                "orange-bg": this.statusClass === "away",
+                "orange-bg": this.statusClass === "away-for-a-meal",
                 "bg-danger": this.statusClass === "busy",
                 "bg-secondary": this.statusClass === "in-a-meating",
-                "bg-dark": this.statusClass === "on-hourly-leave",
-                "bg-light": this.statusClass === "left-work",
-                "bg-dark": this.statusClass === "on-daily-leave",
+                "gray-bg": this.statusClass === "on-hourly-leave",
+                "white-bg": this.statusClass === "left-work",
+                "gray-bg": this.statusClass === "on-daily-leave",
             };
         },
     },
