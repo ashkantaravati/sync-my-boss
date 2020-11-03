@@ -6,7 +6,7 @@ from .serializers import (
     AttendanceSerializer,
     ActivitySerializer,
 )
-from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, Activity
+from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, Activity, WorkUpdate
 from rest_framework import generics, authentication, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Log, Employee, AvailabilityStatus, Workplace, Attendance, Activity
+from .models import Log, Employee, AvailabilityStatus, Workplace, Attendance, Activity, WorkUpdate
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -53,4 +53,8 @@ class AttendanceSerializer(serializers.ModelSerializer):
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
+        fields = "__all__"
+class WorkUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkUpdate
         fields = "__all__"
