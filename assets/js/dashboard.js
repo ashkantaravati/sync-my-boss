@@ -29,6 +29,10 @@ const statusBar = {
             statusClass: "",
             currentDateTime: "",
             clock:"",
+            clockConfig:{
+                AM_Display:"قبل از ظهر",
+                PM_Display:"بعد از ظهر"
+            }
         };
     },
     computed: {
@@ -63,13 +67,13 @@ const statusBar = {
             hours = date.getHours();
             minutes = date.getMinutes();
             seconds = date.getSeconds();
-            var session = "AM";
+            var session = this.clockConfig.AM_Display;
             if (hours == 0) {
                 hours = 12;
             }
             if (hours > 12) {
                 hours = hours - 12;
-                session = "PM";
+                session = this.clockConfig.PM_Display
             }
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;
