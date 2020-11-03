@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.dashboard),
+    path("dashboard", views.dashboard),
     path("api/logs", LogList.as_view()),
     path("api/availability-statuses/create", SubmitAvailabilityStatus.as_view()),
     path("api/employee/<int:id>", GetEmployeeInfo.as_view()),
