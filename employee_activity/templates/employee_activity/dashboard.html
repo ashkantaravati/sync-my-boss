@@ -8,7 +8,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'site.webmanifest' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
@@ -34,7 +35,8 @@
         <section class="my-3">
             <div class="container">
                 <div class="row" id="statusBar">
-                    <div v-bind:class="classObject" class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
+                    <div v-bind:class="classObject"
+                        class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
                         <!-- <div>{{username}}</div> -->
                         [[setEmployeeId({{current_employee_id}})]]
                         <div>[[employeeName]] <a class="text-danger" href="{% url 'logout' %}">(خروج)</a></div>
@@ -42,7 +44,8 @@
                             <div class="font-weight-bold">[[currentAvailabilityStatusText]]</div>
                             <div>[[currentWorkUpdate]]</div>
                         </div>
-                        <div><span>{{today}}</span> - <span id="realTime"><span id="DigitalCLOCK"> [[realTime]]</span></span>
+                        <div><span>{{today}}</span> - <span id="realTime">
+                                    [[clock]] </span>
                         </div>
                     </div>
                 </div>
@@ -56,7 +59,10 @@
                             <div id="attendance" class="text-center">
                                 [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
-                                    <select v-model="selectedWorkplace" class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :disabled="entered">
+                                    <select v-model="selectedWorkplace"
+                                        class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        :disabled="entered">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
                                             <option v-for="option in workplaceOptions" v-bind:value="option.id"><span
                                                     class="dropdown-item">[[ option.name ]]</span></option>
@@ -78,7 +84,9 @@
                                 [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
 
-                                    <select v-model="selected" class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <select v-model="selected"
+                                        class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
                                             <option v-for="option in options" v-bind:value="option.reason"><span
                                                     class="dropdown-item">[[ option.reason_display ]]</span></option>
@@ -87,7 +95,8 @@
                                 </div>
                                 <div class="">
                                     <div class="input-group my-2">
-                                        <input type="text" v-model="until" class="form-control" placeholder="زمان بازگشت" />
+                                        <input type="text" v-model="until" class="form-control"
+                                            placeholder="زمان بازگشت" />
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -100,7 +109,9 @@
                             <div class="v-line my-2"></div>
                             <div>
                                 <div class="dropdown w-100">
-                                    <button class="btn dropdown-style dropdown-toggle w-100 text-right" type="button" id="userState" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn dropdown-style dropdown-toggle w-100 text-right" type="button"
+                                        id="userState" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
                                         نام فعالیت
                                     </button>
                                     <div class="dropdown-menu w-100 text-right" aria-labelledby="userState">
@@ -116,7 +127,8 @@
                                     <input type="text" class="form-control my-2" placeholder="زمان تخمینی فعالیت" />
                                 </div>
                                 <div>
-                                    <textarea class="form-control my-2" aria-label="With textarea" placeholder="توضیحات"></textarea>
+                                    <textarea class="form-control my-2" aria-label="With textarea"
+                                        placeholder="توضیحات"></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="button" class="btn custom-btn green-bg">
@@ -129,10 +141,12 @@
                     <div class="col-9 pl-0">
                         <div class="main-box">
                             <div id="timeline" class="timeline">
-                                <div v-for="log in logs" class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
+                                <div v-for="log in logs"
+                                    class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
                                     <div class="col-10 col-md-5 order-3 p-0 order-md-1 timeline-content">
                                         <span class="username d-block py-1 pr-3">[[log.employee.full_name]]</span>
-                                        <span class="username text-light d-block py-1 pr-3">[[log.employee.full_name]]</span>
+                                        <span
+                                            class="username text-light d-block py-1 pr-3">[[log.employee.full_name]]</span>
                                         <p class="py-1 px-2">
                                             [[log.event_message]]
                                         </p>
@@ -153,14 +167,19 @@
         </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+        integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+        crossorigin="anonymous"></script>
     <script src="{% static 'js/dashboard.js' %}"></script>
 </body>
 

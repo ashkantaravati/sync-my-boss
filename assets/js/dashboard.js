@@ -16,6 +16,7 @@ const employeeDataMixin = {
         };
     }
 };
+
 const statusBar = {
     delimiters: ["[[", "]]"],
     mixins: [employeeDataMixin],
@@ -26,7 +27,8 @@ const statusBar = {
             currentAvailabilityStatusText: "",
             currentWorkUpdate: "",
             statusClass: "",
-            currentDateTime: ""
+            currentDateTime: "",
+            clock:"",
         };
     },
     computed: {
@@ -55,10 +57,33 @@ const statusBar = {
                 this.currentWorkUpdate = employee.current_work_update;
                 this.statusClass = employee.current_availability_status_class;
             });
-        }
+        },
+        tick() {
+            date = new Date();
+            hours = date.getHours();
+            minutes = date.getMinutes();
+            seconds = date.getSeconds();
+            var session = "AM";
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (hours > 12) {
+                hours = hours - 12;
+                session = "PM";
+            }
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            var time = hours + ":" + minutes + ":" + seconds + " " + session;
+            this.clock = time;
+
+
+        },
+
     },
     mounted() {
         // this.username = this.globalusername;
+        setInterval(()=>this.tick(), 1000);
         this.updateStatus();
         updateFunc = this.updateStatus;
     }
@@ -209,46 +234,3 @@ const attendance = {
     }
 };
 Vue.createApp(attendance).mount("#attendance");
-
-const realTime = {
-    delimiters: ["[[", "]]"],
-    //mixins: [employeeDataMixin],
-    data() {
-        return {
-            date: '',
-            h: '',
-            m: '',
-            s: '',
-            session: "AM",
-        };
-    },
-
-    methods: {
-        showTime() {
-            date = new Date();
-            hours = date.getHours();
-            minutes = date.getMinutes();
-            seconds = date.getSeconds();
-            session = "AM";
-            if (hours == 0) {
-                hours = 12;
-            }
-            if (hours > 12) {
-                hours = hours - 12;
-                session = "PM";
-            }
-            hours = (hours < 10) ? "0" + hours : hours;
-            minutes = (minutes < 10) ? "0" + minutes : minutes;
-            seconds = (seconds < 10) ? "0" + seconds : seconds;
-            var time = hours + ":" + minutes + ":" + seconds + " " + session;
-            document.getElementById("DigitalCLOCK").innerText = time;
-            document.getElementById("DigitalCLOCK").textContent = time;
-
-            setTimeout(this.showTime, 1000);
-
-
-        },
-    },
-    mounted() { this.showTime(); }
-};
-Vue.createApp(realTime).mount("#realTime");
