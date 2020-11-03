@@ -1,6 +1,6 @@
 let csrfToken = Cookies.get("csrftoken");
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
-let updateFunc = ()=> console.log('func is empty');
+let updateFunc = () => console.log('func is empty');
 
 const employeeDataMixin = {
     methods: {
@@ -209,3 +209,46 @@ const attendance = {
     }
 };
 Vue.createApp(attendance).mount("#attendance");
+
+const realTime = {
+    delimiters: ["[[", "]]"],
+    //mixins: [employeeDataMixin],
+    data() {
+        return {
+            date: '',
+            h: '',
+            m: '',
+            s: '',
+            session: "AM",
+        };
+    },
+
+    methods: {
+        showTime() {
+            date = new Date();
+            hours = date.getHours();
+            minutes = date.getMinutes();
+            seconds = date.getSeconds();
+            session = "AM";
+            if (hours == 0) {
+                hours = 12;
+            }
+            if (hours > 12) {
+                hours = hours - 12;
+                session = "PM";
+            }
+            hours = (hours < 10) ? "0" + hours : hours;
+            minutes = (minutes < 10) ? "0" + minutes : minutes;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            var time = hours + ":" + minutes + ":" + seconds + " " + session;
+            document.getElementById("DigitalCLOCK").innerText = time;
+            document.getElementById("DigitalCLOCK").textContent = time;
+
+            setTimeout(this.showTime, 1000);
+
+
+        },
+    },
+    mounted() { this.showTime(); }
+};
+Vue.createApp(realTime).mount("#realTime");
