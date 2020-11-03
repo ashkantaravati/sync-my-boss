@@ -33,3 +33,11 @@ def get_formatted_jdatetime(datetime_object, object_type="datetime", show_second
 
 def get_today_formatted_jdatetime():
     return get_formatted_jdatetime(date.today(), object_type="Date")
+
+
+def get_choices_as_json_serializable(CHOICES, value_key, display_key):
+    serializable_choices = [
+            {f"{value_key}": choice[0], f"{display_key}": choice[1]}
+            for choice in CHOICES
+        ]
+    return serializable_choices

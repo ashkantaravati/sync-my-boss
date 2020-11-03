@@ -7,12 +7,21 @@ from .serializers import (
     ActivitySerializer,
     WorkUpdateSerializer,
 )
-from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, Activity, WorkUpdate
+from .models import (
+    Log,
+    AvailabilityStatus,
+    Employee,
+    Workplace,
+    Attendance,
+    Activity,
+    WorkUpdate,
+)
 from rest_framework import generics, authentication, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .value_choices import WORK_UPDATE_TYPES
+from .value_choices import WORK_UPDATE_TYPES, AVAILABILITY_STATUS_REASON_TYPES
+from .utils import get_choices_as_json_serializable
 
 
 class LogList(generics.ListAPIView):
@@ -43,16 +52,14 @@ class SetAttendance(generics.CreateAPIView):
 
 class WorkUpdateTypes(APIView):
     def get(self, request):
-        update_types = [
-            {"update_type": update_type[0], "update_type_display": update_type[1]}
-            for update_type in WORK_UPDATE_TYPES
-        ]
+        update_types = get_choices_as_json_serializable(
+            WORK_UPDATE_TYPES, "update_type", "update_type_display"
+        )
         return Response(update_types)
-
 
 class GetActivities(generics.ListAPIView):
     queryset = Activity.objects.filter(is_archived=False)
-    serializer_class= ActivitySerializer
+    serializer_class = ActivitySerializer
 
 
 class SubmitWorkUpdate(generics.CreateAPIView):
