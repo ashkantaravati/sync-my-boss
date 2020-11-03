@@ -1,6 +1,27 @@
 let csrfToken = Cookies.get("csrftoken");
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
-let updateFunc = ()=> console.log('func is empty');
+let updateFunc = () => console.log("func is empty");
+
+function getFormattedCurrentTime(clockConfig) {
+    date = new Date();
+    hours = date.getHours();
+    minutes = date.getMinutes();
+    seconds = date.getSeconds();
+    var session = clockConfig.AM_Display;
+    if (hours == 0) {
+        hours = 12;
+    }
+    if (hours > 12) {
+        hours = hours - 12;
+        session = clockConfig.PM_Display;
+    }
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    var time = hours + ":" + minutes + ":" + seconds + " " + session;
+    return time;
+
+}
 
 const employeeDataMixin = {
     methods: {
@@ -8,14 +29,15 @@ const employeeDataMixin = {
             this.employeeId = id;
             //   alert(id);
             //   alert(this.employeeId);
-        }
+        },
     },
     data() {
         return {
-            employeeId: 0
+            employeeId: 0,
         };
-    }
+    },
 };
+
 const statusBar = {
     delimiters: ["[[", "]]"],
     mixins: [employeeDataMixin],
@@ -26,7 +48,12 @@ const statusBar = {
             currentAvailabilityStatusText: "",
             currentWorkUpdate: "",
             statusClass: "",
-            currentDateTime: ""
+            currentDateTime: "",
+            clock: "",
+            clockConfig: {
+                AM_Display: "قبل از ظهر",
+                PM_Display: "بعد از ظهر",
+            },
         };
     },
     computed: {
@@ -40,13 +67,13 @@ const statusBar = {
                 "bg-secondary": this.statusClass === "in-a-meating",
                 "bg-dark": this.statusClass === "on-hourly-leave",
                 "bg-light": this.statusClass === "left-work",
-                "bg-dark": this.statusClass === "on-daily-leave"
+                "bg-dark": this.statusClass === "on-daily-leave",
             };
-        }
+        },
     },
     methods: {
         updateStatus() {
-            axios.get(`/api/employee/${this.employeeId}`).then(response => {
+            axios.get(`/api/employee/${this.employeeId}`).then((response) => {
                 let employee = response.data;
                 this.employeeName = employee.full_name;
                 this.currentAvailabilityStatus = employee.current_availability_status;
@@ -55,20 +82,25 @@ const statusBar = {
                 this.currentWorkUpdate = employee.current_work_update;
                 this.statusClass = employee.current_availability_status_class;
             });
-        }
+        },
+        tick() {
+            
+            this.clock = getFormattedCurrentTime(this.clockConfig);
+        },
     },
     mounted() {
         // this.username = this.globalusername;
+        setInterval(() => this.tick(), 1000);
         this.updateStatus();
         updateFunc = this.updateStatus;
-    }
+    },
 };
 let statusBarApp = Vue.createApp(statusBar).mount("#statusBar");
 const timeline = {
     delimiters: ["[[", "]]"],
     data() {
         return {
-            logs: []
+            logs: [],
         };
     },
     methods: {
@@ -76,18 +108,18 @@ const timeline = {
             //   axios.get('/api/logs', { params: { id: id }})
             axios
                 .get("/api/logs")
-                .then(response => {
+                .then((response) => {
                     console.log(response);
                     this.logs = response.data;
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log(response);
                 });
-        }
+        },
     },
     mounted() {
         setInterval(this.refreshTimeline, 2000);
-    }
+    },
 };
 Vue.createApp(timeline).mount("#timeline");
 
@@ -96,45 +128,46 @@ const availabilityStatus = {
     mixins: [employeeDataMixin],
     data() {
         return {
-            options: [{
+            options: [
+                {
                     reason: "Available",
-                    reason_display: "در دسترس"
+                    reason_display: "در دسترس",
                 },
                 {
                     reason: "In a Meeting",
-                    reason_display: "در جلسه"
+                    reason_display: "در جلسه",
                 },
                 {
                     reason: "Focusing",
-                    reason_display: "در حال تمرکز"
+                    reason_display: "در حال تمرکز",
                 },
                 {
                     reason: "Busy",
-                    reason_display: "مشغول"
+                    reason_display: "مشغول",
                 },
                 {
                     reason: "On Hourly Leave",
-                    reason_display: "در مرخصی ساعتی"
+                    reason_display: "در مرخصی ساعتی",
                 },
                 {
                     reason: "On Daily Leave",
-                    reason_display: "در مرخصی روزانه"
+                    reason_display: "در مرخصی روزانه",
                 },
                 {
                     reason: "Left Work",
-                    reason_display: "سازمان را ترک کرده"
+                    reason_display: "سازمان را ترک کرده",
                 },
                 {
                     reason: "Away",
-                    reason_display: "ترک میز"
+                    reason_display: "ترک میز",
                 },
                 {
                     reason: "Away for a meal",
-                    reason_display: "ترک میز برای صرف وعده‌ی غذایی"
-                }
+                    reason_display: "ترک میز برای صرف وعده‌ی غذایی",
+                },
             ],
             selected: "Available",
-            until: ""
+            until: "",
         };
     },
     methods: {
@@ -144,25 +177,25 @@ const availabilityStatus = {
                 let statusChangeData = {
                     reason: this.selected,
                     until: this.until,
-                    employee: this.employeeId
+                    employee: this.employeeId,
                 };
 
                 console.log(statusChangeData);
                 axios
                     .post("/api/availability-statuses/create", statusChangeData)
-                    .then(response => {
+                    .then((response) => {
                         console.log(response);
                         // this.logs = response.data;
                         // timeline.refreshTimeline()
                         updateFunc();
                     })
-                    .catch(error => {
+                    .catch((error) => {
                         console.log(error);
                     });
             }
-        }
+        },
     },
-    mounted() {}
+    mounted() { },
 };
 Vue.createApp(availabilityStatus).mount("#availabilityStatus");
 
@@ -171,18 +204,19 @@ const attendance = {
     mixins: [employeeDataMixin],
     data() {
         return {
-            options: [{
+            options: [
+                {
                     action: "Exit",
-                    action_display: "خروج"
+                    action_display: "خروج",
                 },
                 {
                     action: "Enter",
-                    action_display: "ورود"
-                }
+                    action_display: "ورود",
+                },
             ],
             entered: false,
             workplaceOptions: [],
-            selectedWorkplace: 1
+            selectedWorkplace: 1,
         };
     },
     methods: {
@@ -193,19 +227,19 @@ const attendance = {
                     .post("/api/attendance/set", {
                         employee: this.employeeId,
                         action_type: requestedAction,
-                        workplace: this.selectedWorkplace
+                        workplace: this.selectedWorkplace,
                     })
-                    .then(response => {
+                    .then((response) => {
                         this.entered = response.data.action_type == "Enter" ? true : false;
                         this.selectedWorkplace = response.data.workplace;
                     });
             }
-        }
+        },
     },
     mounted() {
-        axios.get("/api/workplace/all").then(response => {
+        axios.get("/api/workplace/all").then((response) => {
             this.workplaceOptions = response.data;
         });
-    }
+    },
 };
 Vue.createApp(attendance).mount("#attendance");
