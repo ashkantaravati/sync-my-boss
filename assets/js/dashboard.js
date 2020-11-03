@@ -167,7 +167,6 @@ const availabilityStatus = {
     },
     methods: {
         submit(event) {
-            debugger;
             if (event) {
                 let statusChangeData = {
                     reason: this.selected,
@@ -258,7 +257,6 @@ const workUpdate = {
     },
     methods: {
         submitWorkUpdate(event) {
-            debugger;
             if (event) {
                 let workUpdateData = {
                     update_type: this.selectedUpdateType,
