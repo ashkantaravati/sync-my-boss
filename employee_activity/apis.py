@@ -5,6 +5,7 @@ from .serializers import (
     WorkplaceSerializer,
     AttendanceSerializer,
     ActivitySerializer,
+    WorkUpdateSerializer,
 )
 from .models import Log, AvailabilityStatus, Employee, Workplace, Attendance, Activity, WorkUpdate
 from rest_framework import generics, authentication, permissions
@@ -52,3 +53,8 @@ class WorkUpdateTypes(APIView):
 class GetActivities(generics.ListAPIView):
     queryset = Activity.objects.filter(is_archived=False)
     serializer_class= ActivitySerializer
+
+
+class SubmitWorkUpdate(generics.CreateAPIView):
+    queryset = WorkUpdate.objects.all()
+    serializer_class = WorkUpdateSerializer
