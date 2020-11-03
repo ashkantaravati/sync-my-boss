@@ -1,6 +1,6 @@
 let csrfToken = Cookies.get("csrftoken");
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
-let updateFunc = ()=> console.log('func is empty');
+let updateFunc = () => console.log('func is empty');
 
 const employeeDataMixin = {
     methods: {
@@ -215,17 +215,51 @@ const workUpdate = {
     mixins: [employeeDataMixin],
     data() {
         return {
-            updateTypeOptions : [],
-            selectedUpdateType : "Work Started",
+            updateTypeOptions: [],
+            selectedUpdateType: "Work Started",
 
-            activities : [],
-            selectedActivity: 0
+            activities: [],
+            selectedActivity: 0,
+
+            workTitle: "",
+
+            estimatedRemainingTime: "",
+
+            notes: ""
+
         };
     },
-    mounted(){
+    methods: {
+        submitWorkUpdate(event) {
+            debugger;
+            if (event) {
+                let workUpdateData = {
+                    update_type: this.selectedUpdateType,
+                    activity: this.selectedActivity,
+                    work_title: this.workTitle,
+                    notes: this.notes,
+                    estimated_remaining_time: this.estimatedRemainingTime
+                };
+
+                console.log(workUpdateData);
+                axios
+                    .post("/api/workupdate", workUpdateData)
+                    .then(response => {
+                        console.log(response);
+                        // this.logs = response.data;
+                        // timeline.refreshTimeline()
+                        updateFunc();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+        }
+    },
+    mounted() {
         axios.get("/api/types/workupdate").then(response => {
             this.updateTypeOptions = response.data;
-        }).catch(error=>console.log(error));
+        }).catch(error => console.log(error));
 
         axios.get("/api/activity/all-active").then(response => {
             this.activities = response.data;
