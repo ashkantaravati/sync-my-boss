@@ -10,6 +10,8 @@ from employee_activity.apis import (
     WorkUpdateTypes,
     GetActivities,
     SubmitWorkUpdate,
+    AvailabilityStatusTypes
+    
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,6 +26,7 @@ urlpatterns = [
     path("api/workplace/all", GetWorkplaces.as_view()),
     path("api/attendance/set", SetAttendance.as_view()),
     path("api/types/workupdate", WorkUpdateTypes.as_view()),
+    path("api/types/availability-status", AvailabilityStatusTypes.as_view()),
     path("api/activity/all-active", GetActivities.as_view()),
     path("api/workupdate", SubmitWorkUpdate.as_view()),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='employee_activity/login.html')),

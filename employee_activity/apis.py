@@ -57,6 +57,13 @@ class WorkUpdateTypes(APIView):
         )
         return Response(update_types)
 
+class AvailabilityStatusTypes(APIView):
+    def get(self, request):
+        update_types = get_choices_as_json_serializable(
+            AVAILABILITY_STATUS_REASON_TYPES, "reason", "reason_display"
+        )
+        return Response(update_types)
+
 class GetActivities(generics.ListAPIView):
     queryset = Activity.objects.filter(is_archived=False)
     serializer_class = ActivitySerializer
