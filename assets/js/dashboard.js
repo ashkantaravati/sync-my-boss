@@ -27,8 +27,6 @@ const employeeDataMixin = {
     methods: {
         setEmployeeId(id) {
             this.employeeId = id;
-            //   alert(id);
-            //   alert(this.employeeId);
         },
     },
     data() {
@@ -89,7 +87,6 @@ const statusBar = {
         },
     },
     mounted() {
-        // this.username = this.globalusername;
         setInterval(() => this.tick(), 1000);
         this.updateStatus();
         updateFunc = this.updateStatus;
@@ -105,15 +102,13 @@ const timeline = {
     },
     methods: {
         refreshTimeline() {
-            //   axios.get('/api/logs', { params: { id: id }})
             axios
                 .get("/api/logs")
                 .then((response) => {
-                    console.log(response);
                     this.logs = response.data;
                 })
                 .catch((error) => {
-                    console.log(response);
+                    console.log(error);
                 });
         },
     },
@@ -185,8 +180,6 @@ const availabilityStatus = {
                     .post("/api/availability-statuses/create", statusChangeData)
                     .then((response) => {
                         console.log(response);
-                        // this.logs = response.data;
-                        // timeline.refreshTimeline()
                         updateFunc();
                     })
                     .catch((error) => {
@@ -280,8 +273,6 @@ const workUpdate = {
                     .post("/api/workupdate", workUpdateData)
                     .then(response => {
                         console.log(response);
-                        // this.logs = response.data;
-                        // timeline.refreshTimeline()
                         updateFunc();
                     })
                     .catch(error => {
