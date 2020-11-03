@@ -36,7 +36,7 @@
             <div class="container">
                 <div class="row" id="statusBar">
                     <div v-bind:class="classObject"
-                        class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center orange-bg">
+                        class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center">
                         <!-- <div>{{username}}</div> -->
                         [[setEmployeeId({{current_employee_id}})]]
                         <div>[[employeeName]] <a class="text-danger" href="{% url 'logout' %}">(خروج)</a></div>
