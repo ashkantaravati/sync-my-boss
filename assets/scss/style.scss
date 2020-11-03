@@ -37,7 +37,9 @@
      background-color: #fff;
      border-radius: $radius-big;
      box-shadow: $shadow-big;
-     padding: 1rem
+     padding: 1rem;
+     position: relative;
+     z-index: -1;
  }
  
  .dropdown-style {

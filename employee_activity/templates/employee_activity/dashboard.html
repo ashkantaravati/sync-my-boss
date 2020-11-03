@@ -87,7 +87,10 @@
                                 </div>
                                 <div class="">
                                     <div class="input-group my-2">
-                                        <input type="text" v-model="until" class="form-control" placeholder="زمان بازگشت" />
+                                        <div id="datePicker">
+                                            <date-picker v-model="datetime" type="datetime" format="jYYYY-jMM-jDD HH:mm:ss"></date-picker>
+                                        </div>
+                                        <!-- <input type="text" v-model="until" class="form-control" placeholder="زمان بازگشت" /> -->
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -126,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-9 pl-0">
+                    <div class="col-9 pl-0 position-relative z--1">
                         <div class="main-box">
                             <div id="timeline" class="timeline">
                                 <div v-for="log in logs" class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
@@ -162,6 +165,21 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="{% static 'js/dashboard.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#datePicker',
+            data: {
+                date: '1397/02/02'
+            },
+            components: {
+                DatePicker: VuePersianDatetimePicker
+            }
+        });
+    </script>
 </body>
 
 </html>
