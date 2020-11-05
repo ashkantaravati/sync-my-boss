@@ -264,3 +264,30 @@ const workUpdate = {
   },
 };
 Vue.createApp(workUpdate).mount("#workUpdate");
+
+
+const insights = {
+    delimiters: ["[[", "]]"],
+    data() {
+      return {
+        presentEmployees: {},
+      };
+    },
+    methods: {
+      updateInsights() {
+        axios
+          .get("/api/employee/active")
+          .then((response) => {
+            this.presentEmployees = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+    },
+    mounted() {
+      this.updateInsights();
+      setInterval(this.updateInsights, 1000);
+    },
+  };
+  Vue.createApp(insights).mount("#insights");
