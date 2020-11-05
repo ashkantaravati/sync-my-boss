@@ -19,7 +19,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=100, verbose_name="نام خانوادگی")
     job_title = models.CharField(max_length=100, verbose_name="عنوان شغل")
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="کاربر")
-
+    is_present_now = models.BooleanField(verbose_name="الان در سازمان حضور دارد؟",default=False)
     class Meta:
         verbose_name = "کارمند"
         verbose_name_plural = "کارمندان"
@@ -161,6 +161,20 @@ class Attendance(LogMixin):
 
     def __str__(self):
         return f"{self.get_type_info()}: {self.employee} - {self.workplace}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.action_type == "Enter":
+            self.employee.is_present_now = True
+            self.employee.save()
+        
+        elif self.action_type == "Exit":
+            self.employee.is_present_now = False
+            self.employee.save()
+        
+        else:
+            pass
+
 
 
 class AvailabilityStatus(LogMixin):
