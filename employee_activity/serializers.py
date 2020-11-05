@@ -15,6 +15,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "current_availability_status_text",
             "current_availability_status_class",
             "current_work_update",
+            "is_present_now"
         ]
 
 
