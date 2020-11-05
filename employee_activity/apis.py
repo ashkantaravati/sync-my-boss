@@ -57,12 +57,14 @@ class WorkUpdateTypes(APIView):
         )
         return Response(update_types)
 
+
 class AvailabilityStatusTypes(APIView):
     def get(self, request):
         update_types = get_choices_as_json_serializable(
             AVAILABILITY_STATUS_REASON_TYPES, "reason", "reason_display"
         )
         return Response(update_types)
+
 
 class GetActivities(generics.ListAPIView):
     queryset = Activity.objects.filter(is_archived=False)
@@ -72,3 +74,22 @@ class GetActivities(generics.ListAPIView):
 class SubmitWorkUpdate(generics.CreateAPIView):
     queryset = WorkUpdate.objects.all()
     serializer_class = WorkUpdateSerializer
+
+
+class PresentEmployees(APIView):
+    def get(self, request):
+        # TODO we should check which employee's requesting so we can exclude them from the report
+        present_employees = Employee.objects.filter(is_present_now=True)
+        if not present_employees:
+            return Response(None)
+        numberOfPresentEmployees = len(present_employees)
+        present_employee_report = {
+            "numberOfPresentEmployees": numberOfPresentEmployees,
+            "numberOfPresentCoworkers": numberOfPresentEmployees -1
+            if numberOfPresentEmployees >= 0
+            else 0,
+            "presentEmployeesData": [
+                employee.full_name for employee in present_employees
+            ],
+        }
+        return Response(present_employee_report)

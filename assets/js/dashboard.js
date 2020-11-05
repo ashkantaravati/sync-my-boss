@@ -196,6 +196,9 @@ const attendance = {
     },
   },
   mounted() {
+    axios.get(`/api/employee/${this.employeeId}`).then((response) => { 
+        let employee = response.data;
+        this.entered = employee.is_present_now;});
     axios.get("/api/workplace/all").then((response) => {
       this.workplaceOptions = response.data;
     });
@@ -262,3 +265,30 @@ const workUpdate = {
   },
 };
 Vue.createApp(workUpdate).mount("#workUpdate");
+
+
+const insights = {
+    delimiters: ["[[", "]]"],
+    data() {
+      return {
+        presentEmployees: {},
+      };
+    },
+    methods: {
+      updateInsights() {
+        axios
+          .get("/api/employee/active")
+          .then((response) => {
+            this.presentEmployees = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+    },
+    mounted() {
+      this.updateInsights();
+      setInterval(this.updateInsights, 120000);
+    },
+  };
+  Vue.createApp(insights).mount("#insights");
