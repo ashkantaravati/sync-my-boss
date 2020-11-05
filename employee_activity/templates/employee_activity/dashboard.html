@@ -26,8 +26,18 @@
                     <div class="bord-title font-weight-bold">
                         تابلوی اعلانات سازمانی
                     </div>
-                    <div>
-                        <span>[[presentEmployees.numberOfPresentCoworkers]]</span> همکار حضور دارند
+                    <div v-if="presentEmployees">
+                        <template v-if="presentEmployees.numberOfPresentCoworkers === 0">
+                            فقط شما حضور دارید
+                        </template>
+                        <template v-else>
+                            <span>[[presentEmployees.numberOfPresentCoworkers]]</span> همکار حضور دارند
+
+                        </template>
+                    </div>
+                    <div v-else>
+                            هیچ همکاری حضور ندارد.
+
                     </div>
                 </div>
             </nav>
