@@ -20,14 +20,14 @@
         {{ csrf_token }}
     </div>
     <div id="app">
-        <section class="navigation">
+        <section id="insights" class="navigation">
             <nav class="container d-flex h-100">
                 <div class="w-100 d-flex justify-content-between align-items-center">
                     <div class="bord-title font-weight-bold">
                         تابلوی اعلانات سازمانی
                     </div>
                     <div>
-                        <span>{{active_coworkers}}</span> همکار آنلاین
+                        <span>[[presentEmployees.numberOfPresentCoworkers]]</span> همکار حضور دارند
                     </div>
                 </div>
             </nav>
