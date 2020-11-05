@@ -195,6 +195,9 @@ const attendance = {
     },
   },
   mounted() {
+    axios.get(`/api/employee/${this.employeeId}`).then((response) => { 
+        let employee = response.data;
+        this.entered = employee.is_present_now;});
     axios.get("/api/workplace/all").then((response) => {
       this.workplaceOptions = response.data;
     });
