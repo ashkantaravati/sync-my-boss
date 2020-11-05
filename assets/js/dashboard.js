@@ -111,6 +111,7 @@ const timeline = {
     },
   },
   mounted() {
+    this.refreshTimeline();
     setInterval(this.refreshTimeline, 2000);
   },
 };
