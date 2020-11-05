@@ -80,9 +80,12 @@ class PresentEmployees(APIView):
     def get(self, request):
         # TODO we should check which employee's requesting so we can exclude them from the report
         present_employees = Employee.objects.filter(is_present_now=True)
+        numberOfPresentEmployees = len(present_employees)
         present_employee_report = {
-            "numberOfPresentEmployees": len(present_employees),
-            "numberOfPresentCoworkers": len(present_employees) - 1,
+            "numberOfPresentEmployees": numberOfPresentEmployees,
+            "numberOfPresentCoworkers": numberOfPresentEmployees
+            if numberOfPresentEmployees >= 0
+            else 0,
             "presentEmployeesData": [
                 employee.full_name for employee in present_employees
             ],
