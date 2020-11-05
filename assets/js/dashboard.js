@@ -287,7 +287,7 @@ const insights = {
     },
     mounted() {
       this.updateInsights();
-      setInterval(this.updateInsights, 1000);
+      setInterval(this.updateInsights, 120000);
     },
   };
   Vue.createApp(insights).mount("#insights");
