@@ -151,7 +151,7 @@
                                 <div v-for="log in logs"
                                     class="row m-0 justify-content-end justify-content-md-around align-items-start  timeline-nodes">
                                     <div class="col-10 col-md-5 order-3 p-0 order-md-1 timeline-content">
-                                        <span class="username d-block py-1 pr-3">[[log.employee.full_name]]</span>
+                                        <span class="username d-block py-1 pr-3">[[log.employee.full_name]] ([[log.employee.is_present_now ? "حضور دارد" : "حضور ندارد"]]) </span>
                                         <span
                                             class="username text-light d-block py-1 pr-3">[[log.employee.full_name]]</span>
                                         <p class="py-1 px-2">
