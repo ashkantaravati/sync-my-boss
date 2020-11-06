@@ -78,16 +78,16 @@ class SubmitWorkUpdate(generics.CreateAPIView):
 
 class PresentEmployees(APIView):
     def get(self, request):
-        # TODO we should check which employee's requesting so we can exclude them from the report
+        requesting_employee = request.user.employee
         present_employees = Employee.objects.filter(is_present_now=True)
         if not present_employees:
             return Response(None)
-        numberOfPresentEmployees = len(present_employees)
+        present_coworkers = present_employees.exclude(id=requesting_employee.id)
+        number_of_present_employees = len(present_employees)
+        number_of_present_coworkers = len(present_coworkers)
         present_employee_report = {
-            "numberOfPresentEmployees": numberOfPresentEmployees,
-            "numberOfPresentCoworkers": numberOfPresentEmployees -1
-            if numberOfPresentEmployees >= 0
-            else 0,
+            "numberOfPresentEmployees": number_of_present_employees,
+            "numberOfPresentCoworkers": number_of_present_coworkers,
             "presentEmployeesData": [
                 employee.full_name for employee in present_employees
             ],
