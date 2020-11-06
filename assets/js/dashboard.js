@@ -1,6 +1,7 @@
 let csrfToken = Cookies.get("csrftoken");
 axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
 let updateFunc = () => console.log("func is empty");
+let _employeeId = null;
 
 function getFormattedCurrentTime(clockConfig) {
   date = new Date();
@@ -22,22 +23,8 @@ function getFormattedCurrentTime(clockConfig) {
   return time;
 }
 
-const employeeDataMixin = {
-  methods: {
-    setEmployeeId(id) {
-      this.employeeId = id;
-    },
-  },
-  data() {
-    return {
-      employeeId: 0,
-    };
-  },
-};
-
 const statusBar = {
   delimiters: ["[[", "]]"],
-  mixins: [employeeDataMixin],
   data() {
     return {
       employeeName: "",
@@ -70,8 +57,9 @@ const statusBar = {
   },
   methods: {
     updateStatus() {
-      axios.get(`/api/employee/${this.employeeId}`).then((response) => {
+      axios.get("/api/employee/me").then((response) => {
         let employee = response.data;
+        _employeeId = employee.id;
         this.employeeName = employee.full_name;
         this.currentAvailabilityStatus = employee.current_availability_status;
         this.currentAvailabilityStatusText =
@@ -119,7 +107,6 @@ Vue.createApp(timeline).mount("#timeline");
 
 const availabilityStatus = {
   delimiters: ["[[", "]]"],
-  mixins: [employeeDataMixin],
   data() {
     return {
       options: [],
@@ -133,7 +120,7 @@ const availabilityStatus = {
         let statusChangeData = {
           reason: this.selected,
           until: this.until,
-          employee: this.employeeId,
+          employee: _employeeId,
         };
 
         console.log(statusChangeData);
@@ -160,7 +147,6 @@ Vue.createApp(availabilityStatus).mount("#availabilityStatus");
 
 const attendance = {
   delimiters: ["[[", "]]"],
-  mixins: [employeeDataMixin],
   data() {
     return {
       options: [
@@ -184,7 +170,7 @@ const attendance = {
         let requestedAction = this.entered ? "Exit" : "Enter";
         axios
           .post("/api/attendance/set", {
-            employee: this.employeeId,
+            employee: _employeeId,
             action_type: requestedAction,
             workplace: this.selectedWorkplace,
           })
@@ -196,7 +182,7 @@ const attendance = {
     },
   },
   mounted() {
-    axios.get(`/api/employee/${this.employeeId}`).then((response) => { 
+    axios.get("/api/employee/me").then((response) => { 
         let employee = response.data;
         this.entered = employee.is_present_now;});
     axios.get("/api/workplace/all").then((response) => {
@@ -208,7 +194,6 @@ Vue.createApp(attendance).mount("#attendance");
 
 const workUpdate = {
   delimiters: ["[[", "]]"],
-  mixins: [employeeDataMixin],
   data() {
     return {
       updateTypeOptions: [],
