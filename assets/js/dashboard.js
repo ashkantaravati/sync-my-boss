@@ -213,6 +213,7 @@ const workUpdate = {
     submitWorkUpdate(event) {
       if (event) {
         let workUpdateData = {
+          employee: _employeeId,
           update_type: this.selectedUpdateType,
           activity: this.selectedActivity,
           work_title: this.workTitle,
