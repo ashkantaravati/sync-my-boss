@@ -54,7 +54,6 @@
                     <div v-bind:class="classObject"
                         class="col-12 user-status-bar py-1 d-flex justify-content-between align-items-center">
                         <!-- <div>{{username}}</div> -->
-                        [[setEmployeeId({{current_employee_id}})]]
                         <div>[[employeeName]] <a class="text-danger" href="{% url 'logout' %}">(خروج)</a></div>
                         <div class="text-center">
                             <div class="font-weight-bold">[[currentAvailabilityStatusText]]</div>
@@ -73,7 +72,6 @@
                     <div class="col-3 px-0">
                         <div class="side-bar">
                             <div id="attendance" class="text-center">
-                                [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
                                     <select v-model="selectedWorkplace"
                                         class="btn dropdown-style dropdown-toggle w-100 text-right" id="userState"
@@ -97,7 +95,6 @@
                             <div class="v-line my-2"></div>
 
                             <div id="availabilityStatus">
-                                [[setEmployeeId({{current_employee_id}})]]
                                 <div class="dropdown w-100">
 
                                     <select v-model="selected"
