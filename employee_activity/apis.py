@@ -93,3 +93,15 @@ class PresentEmployees(APIView):
             ],
         }
         return Response(present_employee_report)
+
+
+class AuthenticatedEmployee(APIView):
+    def get(self, request):
+        authenticated_user = request.user
+        authenticated_employee = (
+            authenticated_user.employee
+            if authenticated_user.employee
+            else authenticated_user
+        )
+        employee_as_json = EmployeeSerializer(authenticated_employee)
+        return Response(employee_as_json.data)

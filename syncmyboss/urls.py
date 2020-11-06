@@ -11,7 +11,8 @@ from employee_activity.apis import (
     GetActivities,
     SubmitWorkUpdate,
     AvailabilityStatusTypes,
-    PresentEmployees
+    PresentEmployees,
+    AuthenticatedEmployee
     
 )
 from django.conf import settings
@@ -26,6 +27,7 @@ urlpatterns = [
     path("api/availability-statuses/create", SubmitAvailabilityStatus.as_view()),
     path("api/employee/<int:id>", GetEmployeeInfo.as_view()),
     path("api/employee/active", PresentEmployees.as_view()),
+    path("api/employee/me", AuthenticatedEmployee.as_view()),
     path("api/workplace/all", GetWorkplaces.as_view()),
     path("api/attendance/set", SetAttendance.as_view()),
     path("api/types/workupdate", WorkUpdateTypes.as_view()),
