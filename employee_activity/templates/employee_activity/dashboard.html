@@ -31,7 +31,13 @@
                             فقط شما حضور دارید
                         </template>
                         <template v-else>
-                            <span>[[presentEmployees.numberOfPresentCoworkers]]</span> همکار حضور دارند
+                            <span>[[presentEmployees.numberOfPresentCoworkers]]</span>
+                            <template v-if="presentEmployees.numberOfPresentCoworkers === 1">
+                                همکار حضور دارد
+                            </template>
+                            <template v-else>
+                             همکار حضور دارند
+                             </template>
 
                         </template>
                     </div>
