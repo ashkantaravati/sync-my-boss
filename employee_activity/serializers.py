@@ -1,11 +1,12 @@
 from rest_framework import serializers
-from .models import Log, Employee, AvailabilityStatus, Workplace, Attendance
+from .models import Log, Employee, AvailabilityStatus, Workplace, Attendance, Activity, WorkUpdate
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = [
+            "id",
             "first_name",
             "last_name",
             "job_title",
@@ -15,6 +16,7 @@ class EmployeeSerializer(serializers.ModelSerializer):
             "current_availability_status_text",
             "current_availability_status_class",
             "current_work_update",
+            "is_present_now"
         ]
 
 
@@ -48,3 +50,15 @@ class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ["employee", "action_type", "workplace"]
+
+
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Activity
+        fields = "__all__"
+
+        
+class WorkUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WorkUpdate
+        fields = "__all__"

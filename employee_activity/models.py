@@ -15,11 +15,11 @@ from .value_choices import (
 
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    job_title = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    first_name = models.CharField(max_length=100, verbose_name="نام")
+    last_name = models.CharField(max_length=100, verbose_name="نام خانوادگی")
+    job_title = models.CharField(max_length=100, verbose_name="عنوان شغل")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="کاربر")
+    is_present_now = models.BooleanField(verbose_name="الان در سازمان حضور دارد؟",default=False)
     class Meta:
         verbose_name = "کارمند"
         verbose_name_plural = "کارمندان"
@@ -64,9 +64,9 @@ class Employee(models.Model):
 
 
 class LogMixin(models.Model):
-    log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True)
-    employee = models.ForeignKey("Employee", on_delete=models.CASCADE, default=1)
-    datetime_occured = jmodels.jDateTimeField(auto_now_add=True)
+    log = models.OneToOneField("Log", on_delete=models.CASCADE, null=True, blank=True, verbose_name="لاگ مربوطه")
+    employee = models.ForeignKey("Employee", on_delete=models.CASCADE, default=1, verbose_name="کارمند")
+    datetime_occured = jmodels.jDateTimeField(auto_now_add=True, verbose_name="تاریخ")
 
     class Meta:
         abstract = True
@@ -88,9 +88,9 @@ class LogMixin(models.Model):
 class Log(models.Model):
     objects = jmodels.jManager()
     datetime_occured = jmodels.jDateTimeField(auto_now_add=True)
-    employee = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True)
-    event_message = models.TextField()
-    event_type = models.CharField(max_length=40)
+    employee = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, verbose_name="کارمند")
+    event_message = models.TextField(verbose_name="موضوع لاگ")
+    event_type = models.CharField(max_length=40, verbose_name="نوع لاگ")
 
     class Meta:
         verbose_name = "لاگ"
@@ -105,10 +105,11 @@ class Log(models.Model):
 
 
 class Activity(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name="موضوع فعالیت")
     activity_type = models.CharField(
-        max_length=50, choices=ACTIVITY_TYPES, default="Standard"
+        max_length=50, choices=ACTIVITY_TYPES, default="Standard", verbose_name="نوع فعالیت"
     )
+    is_archived = models.BooleanField(verbose_name="آرشیو شده؟",default=False)
 
     class Meta:
         verbose_name = "فعالیت"
@@ -119,11 +120,11 @@ class Activity(models.Model):
 
 
 class WorkUpdate(LogMixin):
-    update_type = models.CharField(max_length=20, choices=WORK_UPDATE_TYPES)
-    activity = models.ForeignKey("Activity", on_delete=models.SET_NULL, null=True)
-    work_title = models.CharField(max_length=200)
-    notes = models.TextField(null=True, blank=True)
-    estimated_remaining_time = models.DurationField()
+    update_type = models.CharField(max_length=20, choices=WORK_UPDATE_TYPES, verbose_name="نوع اعلان")
+    activity = models.ForeignKey("Activity", on_delete=models.SET_NULL, null=True, verbose_name="فعالیت")
+    work_title = models.CharField(max_length=200, verbose_name="عنوان کار")
+    notes = models.TextField(null=True, blank=True, verbose_name="یادداشت")
+    estimated_remaining_time = models.DurationField(verbose_name="زمان تقریبی باقی مانده")
 
     class Meta:
         verbose_name = "اعلان کاری"
@@ -137,7 +138,7 @@ class WorkUpdate(LogMixin):
 
 
 class Workplace(models.Model):
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40, verbose_name="مکان")
 
     class Meta:
         verbose_name = "محل کار"
@@ -148,8 +149,8 @@ class Workplace(models.Model):
 
 
 class Attendance(LogMixin):
-    workplace = models.ForeignKey("Workplace", on_delete=models.SET_NULL, null=True)
-    action_type = models.CharField(max_length=10, choices=ATTENDANCE_ACTION_TYPES)
+    workplace = models.ForeignKey("Workplace", on_delete=models.SET_NULL, null=True, verbose_name= "محل کار")
+    action_type = models.CharField(max_length=10, choices=ATTENDANCE_ACTION_TYPES, verbose_name="نوع فعالیت")
 
     class Meta:
         verbose_name = "سابقه‌ی حضور و غیاب"
@@ -161,11 +162,25 @@ class Attendance(LogMixin):
     def __str__(self):
         return f"{self.get_type_info()}: {self.employee} - {self.workplace}"
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.action_type == "Enter":
+            self.employee.is_present_now = True
+            self.employee.save()
+        
+        elif self.action_type == "Exit":
+            self.employee.is_present_now = False
+            self.employee.save()
+        
+        else:
+            pass
+
+
 
 class AvailabilityStatus(LogMixin):
     objects = jmodels.jManager()
-    reason = models.CharField(max_length=20, choices=AVAILABILITY_STATUS_REASON_TYPES)
-    until = jmodels.jDateTimeField()
+    reason = models.CharField(max_length=20, choices=AVAILABILITY_STATUS_REASON_TYPES, verbose_name="وضعیت")
+    until = jmodels.jDateTimeField(verbose_name="مدت زمان")
 
     class Meta:
         verbose_name = "وضعیت کارمند"

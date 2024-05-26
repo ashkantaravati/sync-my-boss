@@ -1,0 +1,101 @@
+{%load static%}
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+
+<head>
+    <title>سامانه‌ی یکپارچه‌ی گردش اطلاعات سازمانی | صفحه ورود</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+
+<body>
+
+    {% block content %} {% if form.errors %}
+    <p>نام کاربری و گذرواژه‌ی شما صحیح نیست</p>
+    {% endif %} {% if next %} {% if user.is_authenticated %}
+    <p>حساب کاربری شما به این صفحه دسترسی ندارد. برای ادامه با حساب دیگری که اجازه‌ی دسترسی به این صفحه‌ها را دارد وارد شوید.</p>
+    {% else %}
+    <p>برای مشاهده‌ی این صفحه باید به حساب خود وارد شوید</p>
+    {% endif %} {% endif %}
+
+    <div class="w-100 mx-auto my-0">
+        <div class="container-login100">
+
+            <div class="wrap-login100 align-items-center flex-column">
+
+                <div class="bord-title font-weight-bold mb-3">
+                            به سامانه‌ی یکپارچه‌ی گردش اطلاعات سازمانی خوش آمدید
+                </div>
+
+                <div class="d-flex align-items-center  justify-content-around flex-row-reverse w-100">
+                    <div class="login100-pic js-tilt" data-tilt>
+                        <img src="{% static 'img/user-profile.png' %}" alt="IMG">
+                    </div>
+
+                    <form class="login100-form validate-form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <p class="bord-title pb-4 text-center">
+                            ورود به سامانه
+                        </p>
+
+                        <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                            <!-- <input class="input100" type="text" name="email" placeholder="Email"> -->
+                            {{ form.username }}
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <!-- <input class="input100" type="password" name="pass" placeholder="Password"> -->
+                            {{ form.password }}
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+
+                        </div>
+
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn" value="login">
+							ورود
+						</button>
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </div>
+                </form>
+                <!-- {# Assumes you setup the password_reset view in your URLconf #}
+                <p><a href="{% url 'password_reset' %}">Lost password?</a></p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <!--===============================================================================================-->
+    <!-- <script src="js/main.js"></script> -->
+
+</body>
+
+</html>
